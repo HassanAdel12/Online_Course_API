@@ -18,6 +18,7 @@ namespace Online_Course_API.Model
         [ForeignKey("Question")]
         public int Question_ID { get; set; }
 
+        [Required(ErrorMessage = "Question ID is required.")]
         public virtual Question Question { get; set; }
 
         public string St_Answer { get; set; }

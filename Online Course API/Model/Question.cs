@@ -8,6 +8,8 @@ namespace Online_Course_API.Model
         [Key]
         public int Question_ID { get; set; }
 
+        [Required(ErrorMessage = "Question text is required")]
+        [StringLength(255, ErrorMessage = "Question text cannot exceed 255 characters")]
         public string Question_Text { get; set; }
 
         [ForeignKey("Quiz")]

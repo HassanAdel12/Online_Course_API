@@ -10,6 +10,7 @@ namespace Online_Course_API.Model
         [ForeignKey("Student")]
         public int Student_ID { get; set; }
 
+        [Required(ErrorMessage = "Student ID is required.")]
         public virtual Student Student { get; set; }
 
 
@@ -18,8 +19,10 @@ namespace Online_Course_API.Model
         [ForeignKey("Quiz")]
         public int Quiz_ID { get; set; }
 
+        [Required(ErrorMessage = "Quiz ID is required.")]
         public virtual Quiz Quiz { get; set; }
 
+        [Range(0, 100, ErrorMessage = "Grade must be between 0 and 100.")]
         public float Grade { get; set; }
     }
 }
