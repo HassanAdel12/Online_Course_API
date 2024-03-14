@@ -16,10 +16,12 @@ namespace Online_Course_API.Model
         [Key]
         [Column(Order = 1)]
         [ForeignKey("Question")]
+        [Required(ErrorMessage = "Question ID is required.")]
         public int Question_ID { get; set; }
 
-        [Required(ErrorMessage = "Question ID is required.")]
+       
         public virtual Question Question { get; set; }
+
 
         public string St_Answer { get; set; }
     }

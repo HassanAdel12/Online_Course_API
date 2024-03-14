@@ -9,7 +9,7 @@ namespace Online_Course_API.Model
         public int Quiz_ID { get; set; }
 
         [Required(ErrorMessage = "Quiz name is required")]
-        [StringLength(100, MinimumLength = 3, ErrorMessage = "Quiz name must be between 3 and 100 characters")]
+        [StringLength(50, MinimumLength = 3, ErrorMessage = "Quiz name must be between 3 and 50 characters")]
         public string Quiz_Name { get; set; }
 
 

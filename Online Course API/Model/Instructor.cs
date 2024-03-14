@@ -20,8 +20,8 @@ namespace Online_Course_API.Model
 
         [Required(ErrorMessage = "Email is required")]
         [EmailAddress(ErrorMessage = "Invalid email address")]
-        [StringLength(100, ErrorMessage = "Email address cannot exceed 100 characters")]
-        [RegularExpression(@"^[\w-]+(\.[\w-]+)*@[\w-]+(\.[\w-]+)+$", ErrorMessage = "Invalid email format")]
+        [RegularExpression(@"^\w+@gmail\.com$", ErrorMessage = "Email address must be from @gmail.com domain")]
+
         public string Email { get; set; }
 
         [Required(ErrorMessage = "Password is required")]

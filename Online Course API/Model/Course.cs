@@ -9,14 +9,16 @@ namespace Online_Course_API.Model
         public int Course_ID { get; set; }
 
         [Required(ErrorMessage = "Course name is required")]
-        [StringLength(100, MinimumLength = 3, ErrorMessage = "Course name must be between 3 and 100 characters")]
+        [StringLength(50, MinimumLength = 3, ErrorMessage = "Course name must be between 3 and 50 characters")]
         public string Name { get; set; }
 
         [StringLength(500, ErrorMessage = "Description cannot exceed 500 characters")]
         public string Description { get; set; }
 
-        [Display(Name = "Duration ( days)")]
+
+        //[Display(Name = "Duration ( days)")]
         public DateTime Duration { get; set; }
+
 
         [Required(ErrorMessage = "Price is required")]
         [Range(0, 1000, ErrorMessage = "Price must be a positive number")]
