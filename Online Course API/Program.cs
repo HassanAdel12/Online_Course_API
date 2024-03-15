@@ -23,6 +23,8 @@ namespace Online_Course_API
             });
             builder.Services.AddAutoMapper(typeof(Program));
 
+            builder.Services.AddAutoMapper(typeof(Program));
+
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.
