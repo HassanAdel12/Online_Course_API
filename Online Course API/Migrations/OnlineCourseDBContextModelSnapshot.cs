@@ -17,7 +17,7 @@ namespace Online_Course_API.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "8.0.2")
+                .HasAnnotation("ProductVersion", "8.0.3")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
@@ -38,7 +38,8 @@ namespace Online_Course_API.Migrations
 
                     b.Property<string>("Text")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
 
                     b.HasKey("Choise_ID");
 
@@ -57,7 +58,8 @@ namespace Online_Course_API.Migrations
 
                     b.Property<string>("Description")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(500)
+                        .HasColumnType("nvarchar(500)");
 
                     b.Property<DateTime>("Duration")
                         .HasColumnType("datetime2");
@@ -67,7 +69,8 @@ namespace Online_Course_API.Migrations
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
 
                     b.Property<float>("Price")
                         .HasColumnType("real");
@@ -89,7 +92,8 @@ namespace Online_Course_API.Migrations
 
                     b.Property<string>("Grade_Name")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
 
                     b.HasKey("Grade_ID");
 
@@ -106,7 +110,8 @@ namespace Online_Course_API.Migrations
 
                     b.Property<string>("GroupName")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
 
                     b.Property<int>("Instructor_ID")
                         .HasColumnType("int");
@@ -135,7 +140,8 @@ namespace Online_Course_API.Migrations
 
                     b.Property<string>("First_Name")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
 
                     b.Property<string>("Gender")
                         .IsRequired()
@@ -143,7 +149,8 @@ namespace Online_Course_API.Migrations
 
                     b.Property<string>("Last_Name")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
 
                     b.Property<string>("Password")
                         .IsRequired()
@@ -189,7 +196,8 @@ namespace Online_Course_API.Migrations
 
                     b.Property<string>("First_Name")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
 
                     b.Property<string>("Gender")
                         .IsRequired()
@@ -197,7 +205,8 @@ namespace Online_Course_API.Migrations
 
                     b.Property<string>("Last_Name")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
 
                     b.Property<string>("Password")
                         .IsRequired()
@@ -222,7 +231,8 @@ namespace Online_Course_API.Migrations
 
                     b.Property<string>("Question_Text")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(200)
+                        .HasColumnType("nvarchar(200)");
 
                     b.Property<int>("Quiz_ID")
                         .HasColumnType("int");
@@ -250,7 +260,8 @@ namespace Online_Course_API.Migrations
 
                     b.Property<string>("Quiz_Name")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
 
                     b.HasKey("Quiz_ID");
 
@@ -302,7 +313,8 @@ namespace Online_Course_API.Migrations
 
                     b.Property<string>("First_Name")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
 
                     b.Property<string>("Gender")
                         .IsRequired()
@@ -310,7 +322,8 @@ namespace Online_Course_API.Migrations
 
                     b.Property<string>("Last_Name")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
 
                     b.Property<int>("Parent_ID")
                         .HasColumnType("int");
@@ -420,7 +433,8 @@ namespace Online_Course_API.Migrations
 
                     b.Property<string>("Comment")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(200)
+                        .HasColumnType("nvarchar(200)");
 
                     b.Property<float>("Rate")
                         .HasColumnType("real");
