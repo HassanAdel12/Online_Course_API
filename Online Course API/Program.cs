@@ -21,6 +21,7 @@ namespace Online_Course_API
             {
                 Options.UseSqlServer(builder.Configuration.GetConnectionString("Default"));
             });
+            builder.Services.AddAutoMapper(typeof(Program));
 
             var app = builder.Build();
 

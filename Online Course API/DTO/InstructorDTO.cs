@@ -1,10 +1,10 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Online_Course_API.Model;
+using System.ComponentModel.DataAnnotations;
 
-namespace Online_Course_API.Model
+namespace Online_Course_API.DTO
 {
-    public class Instructor
+    public class InstructorDTO
     {
-        [Key]
         public int Instructor_ID { get; set; }
 
         [Required(ErrorMessage = "First name is required")]
@@ -21,7 +21,6 @@ namespace Online_Course_API.Model
         [Required(ErrorMessage = "Email is required")]
         [EmailAddress(ErrorMessage = "Invalid email address")]
         [RegularExpression(@"^\w+@gmail\.com$", ErrorMessage = "Email address must be from @gmail.com domain")]
-
         public string Email { get; set; }
 
         [Required(ErrorMessage = "Password is required")]
@@ -33,11 +32,10 @@ namespace Online_Course_API.Model
         [RegularExpression("^(Male|Female)$", ErrorMessage = "Invalid gender")]
         public string Gender { get; set; }
 
-        public virtual ICollection<Group>? Groups { get; set; }
 
-        public virtual ICollection<Quiz> Quizzes { get; set; }
 
-        public virtual ICollection<Instructor_Course> Instructor_Courses { get; set; }
+
+
 
     }
 }
