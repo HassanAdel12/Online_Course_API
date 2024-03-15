@@ -36,7 +36,6 @@ namespace Online_Course_API.DTO
         [RegularExpression("^(Male|Female)$", ErrorMessage = "Invalid gender")]
         public string Gender { get; set; }
 
-        [ForeignKey("Parent")]
         public int Parent_ID { get; set; }
         //public String Parent_Email { get; set; }
 
