@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Online_Course_API.DTO;
@@ -19,7 +20,7 @@ namespace Online_Course_API.Controllers
             context = _context;
             mapper = _mapper;
         }
-
+        [Authorize(Roles = "Student")]
         [HttpGet]
         public IActionResult GetAll()
         {

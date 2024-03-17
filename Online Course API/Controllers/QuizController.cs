@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Online_Course_API.DTO;
@@ -8,6 +9,7 @@ namespace Online_Course_API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class QuizController : ControllerBase
     {
 
@@ -20,7 +22,7 @@ namespace Online_Course_API.Controllers
             context = _context;
             mapper = _mapper;
         }
-
+        [Authorize(Roles = "Instructor")]
         [HttpGet]
         public IActionResult GetAll()
         {
@@ -28,7 +30,7 @@ namespace Online_Course_API.Controllers
             return Ok(mapper.Map<IEnumerable<QuizDTO>>(context.Quizzes.ToList()));
         }
 
-
+        [Authorize(Roles = "Parent")]
         [HttpGet("{ID:int}")]
         public IActionResult GetOneByID(int ID)
         {
@@ -43,7 +45,7 @@ namespace Online_Course_API.Controllers
             }
         }
 
-
+        [Authorize(Roles = "Instructor")]
         [HttpPost]
         public IActionResult Add(QuizDTO quizDto)
         {
@@ -63,7 +65,7 @@ namespace Online_Course_API.Controllers
             }
         }
 
-
+        [Authorize(Roles = "Instructor")]
         [HttpPut("{ID:int}")]
         public IActionResult Update(QuizDTO quizDto, int ID)
         {
@@ -93,7 +95,7 @@ namespace Online_Course_API.Controllers
             }
         }
 
-
+        [Authorize(Roles = "Instructor")]
         [HttpDelete("{ID:int}")]
         public IActionResult Delete(int ID)
         {

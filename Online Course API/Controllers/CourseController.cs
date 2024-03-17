@@ -8,6 +8,7 @@ namespace Online_Course_API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    
     public class CourseController : ControllerBase
     {
         private readonly OnlineCourseDBContext context;

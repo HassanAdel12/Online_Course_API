@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -9,6 +10,7 @@ namespace Online_Course_API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class InstructorController : ControllerBase
     {
         private readonly OnlineCourseDBContext _context;
@@ -19,7 +21,7 @@ namespace Online_Course_API.Controllers
             _mapper = mapper;
         }
 
-      
+        [Authorize(Roles = "Student")]
         [HttpGet]
         public ActionResult<IEnumerable<InstructorDTO>> GetInstructors()
         {
@@ -27,6 +29,10 @@ namespace Online_Course_API.Controllers
             var instructorDTOs = _mapper.Map<List<InstructorDTO>>(instructors);
             return Ok(instructorDTOs);
         }
+
+        [Authorize(Roles = "Instructor")]
+        [Authorize(Roles = "Student")]
+        [Authorize(Roles = "Parent")]
         [HttpGet("{id}")]
         public ActionResult<InstructorDTO> GetInstructor(int id)
         {
@@ -41,6 +47,7 @@ namespace Online_Course_API.Controllers
             return Ok(instructorDTO);
         }
 
+        [Authorize(Roles = "Instructor")]
         [HttpPost]
         public IActionResult PostInstructor(InstructorDTO instructorDTO)
         {
@@ -57,7 +64,7 @@ namespace Online_Course_API.Controllers
             var createdInstructorDTO = _mapper.Map<InstructorDTO>(instructor);
             return CreatedAtAction(nameof(GetInstructor), new { id = instructor.Instructor_ID }, createdInstructorDTO);
         }
-
+        [Authorize(Roles = "Instructor")]
         [HttpPut("{id}")]
         public IActionResult PutInstructor(int id, InstructorDTO instructorDTO)
         {

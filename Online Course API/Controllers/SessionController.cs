@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Online_Course_API.DTO;
@@ -8,6 +9,7 @@ namespace Online_Course_API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class SessionController : ControllerBase
     {
         private readonly OnlineCourseDBContext _context;
@@ -19,7 +21,7 @@ namespace Online_Course_API.Controllers
             _mapper = mapper;
         }
 
-       
+        [Authorize(Roles = "Student")]
         [HttpGet]
         public ActionResult<IEnumerable<SessionDTO>> GetSessions()
         {

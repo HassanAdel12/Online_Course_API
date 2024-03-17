@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -9,6 +10,7 @@ namespace Online_Course_API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class StudentController : ControllerBase
     {
         private readonly OnlineCourseDBContext _context;
@@ -42,7 +44,7 @@ namespace Online_Course_API.Controllers
             return Ok(studentDTO);
         }
 
-      
+        [Authorize(Roles = "Instructor")]
         [HttpPost]
         public IActionResult PostStudent(StudentDTO studentDTO)
         {
