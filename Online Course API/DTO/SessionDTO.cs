@@ -8,7 +8,7 @@ namespace Online_Course_API.DTO
         [Key]
         public int Session_ID { get; set; }
 
-        [Required(ErrorMessage = "Group name is required")]
+        [Required(ErrorMessage = "Session name is required")]
         [StringLength(100, ErrorMessage = "Session name must be between 3 and 100 characters", MinimumLength = 3)]
         public string SessionName { get; set; }
 
@@ -26,6 +26,6 @@ namespace Online_Course_API.DTO
 
         public int Instructor_ID { get; set; }
 
-        public int Course_ID { get; set; }
+        public int Group_ID { get; set; }
     }
 }

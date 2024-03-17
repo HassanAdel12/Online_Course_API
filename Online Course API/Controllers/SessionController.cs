@@ -23,9 +23,17 @@ namespace Online_Course_API.Controllers
         [HttpGet]
         public ActionResult<IEnumerable<SessionDTO>> GetSessions()
         {
-            var sessions = _context.Sessions.ToList();
-            var sessionDTOs = _mapper.Map<List<SessionDTO>>(sessions);
-            return Ok(sessionDTOs);
+            try
+            {
+                var sessions = _context.Sessions.ToList();
+                var sessionDTOs = _mapper.Map<List<SessionDTO>>(sessions);
+                return Ok(sessionDTOs);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex);
+            }
+            
         }
 
     
@@ -37,11 +45,36 @@ namespace Online_Course_API.Controllers
             {
                 return NotFound();
             }
-            var sessionDTO = _mapper.Map<SessionDTO>(session);
-            return Ok(sessionDTO);
+
+            try
+            {
+                var sessionDTO = _mapper.Map<SessionDTO>(session);
+                return Ok(sessionDTO);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex);
+            }
+            
         }
 
-       
+        [HttpGet("Group/{Group_ID:int}")]
+        public ActionResult<IEnumerable<SessionDTO>> GetSessionforGroup(int Group_ID)
+        {
+            try
+            {
+                var sessions = _context.Sessions.Where(s => s.Group_ID == Group_ID).ToList();
+                var sessionDTOs = _mapper.Map<List<SessionDTO>>(sessions);
+                return Ok(sessionDTOs);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex);
+            }
+
+        }
+
+
         [HttpPost]
         public IActionResult PostSession(SessionDTO sessionDTO)
         {
@@ -50,12 +83,30 @@ namespace Online_Course_API.Controllers
                 return BadRequest(ModelState);
             }
 
-            var session = _mapper.Map<Session>(sessionDTO);
+            try
+            {
+                Group group = _context.Groups.Find(sessionDTO.Group_ID);
+                if (sessionDTO.Start_Date < group.End_Date.ToDateTime(new TimeOnly(0,0,0,0))
+                    && group.Instructor_ID == sessionDTO.Instructor_ID)
+                {
+                    var session = _mapper.Map<Session>(sessionDTO);
 
-            _context.Sessions.Add(session);
-            _context.SaveChanges();
+                    _context.Sessions.Add(session);
+                    _context.SaveChanges();
 
-            return CreatedAtAction(nameof(GetSession), new { id = session.Session_ID }, sessionDTO);
+                    return CreatedAtAction(nameof(GetSession), new { id = session.Session_ID }, sessionDTO);
+                }
+                else
+                {
+                    return BadRequest("Not Can Add Session because date of session after end date for group or Instructor not create this group");
+                }
+                
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex);
+            }
+            
         }
 
      
@@ -74,11 +125,20 @@ namespace Online_Course_API.Controllers
                 return NotFound();
             }
 
-            _mapper.Map(sessionDTO, session);
+            try
+            {
+                _mapper.Map(sessionDTO, session);
 
-            _context.SaveChanges();
+                _context.SaveChanges();
 
-            return NoContent();
+                return NoContent();
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex);
+            }
+
+            
         }
 
    
@@ -92,10 +152,18 @@ namespace Online_Course_API.Controllers
                 return NotFound();
             }
 
-            _context.Sessions.Remove(session);
-            _context.SaveChanges();
+            try
+            {
+                _context.Sessions.Remove(session);
+                _context.SaveChanges();
 
-            return NoContent();
+                return NoContent();
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex);
+            }
+            
         }
     
 }

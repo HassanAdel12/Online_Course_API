@@ -24,9 +24,17 @@ namespace Online_Course_API.Controllers
         [HttpGet]
         public ActionResult<IEnumerable<StudentDTO>> GetStudents()
         {
-            var students = _context.Students.Include(s => s.Parent).ToList();
-            var studentDTOs = _mapper.Map<List<StudentDTO>>(students);
-            return Ok(studentDTOs);
+            try
+            {
+                var students = _context.Students.Include(s => s.Parent).ToList();
+                var studentDTOs = _mapper.Map<List<StudentDTO>>(students);
+                return Ok(studentDTOs);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex);
+            }
+            
         }
 
         // GET: api/Students/5
@@ -38,8 +46,17 @@ namespace Online_Course_API.Controllers
             {
                 return NotFound();
             }
-            var studentDTO = _mapper.Map<StudentDTO>(student);
-            return Ok(studentDTO);
+
+            try
+            {
+                var studentDTO = _mapper.Map<StudentDTO>(student);
+                return Ok(studentDTO);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex);
+            }
+            
         }
 
         [HttpGet("Group/{GroupID:int}")]
@@ -67,12 +84,20 @@ namespace Online_Course_API.Controllers
                 return BadRequest(ModelState);
             }
 
-            var student = _mapper.Map<Student>(studentDTO);
+            try
+            {
+                var student = _mapper.Map<Student>(studentDTO);
 
-            _context.Students.Add(student);
-            _context.SaveChanges();
+                _context.Students.Add(student);
+                _context.SaveChanges();
 
-            return CreatedAtAction(nameof(GetStudent), new { id = student.Student_ID }, studentDTO);
+                return CreatedAtAction(nameof(GetStudent), new { id = student.Student_ID }, studentDTO);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex);
+            }
+            
         }
 
       
@@ -91,11 +116,20 @@ namespace Online_Course_API.Controllers
                 return NotFound();
             }
 
-            _mapper.Map(studentDTO, student);
 
-            _context.SaveChanges();
+            try
+            {
+                _mapper.Map(studentDTO, student);
 
-            return NoContent();
+                _context.SaveChanges();
+
+                return NoContent();
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex);
+            }
+            
         }
 
        
@@ -109,10 +143,18 @@ namespace Online_Course_API.Controllers
                 return NotFound();
             }
 
-            _context.Students.Remove(student);
-            _context.SaveChanges();
+            try
+            {
+                _context.Students.Remove(student);
+                _context.SaveChanges();
 
-            return NoContent();
+                return NoContent();
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex);
+            }
+            
         }
     
 
