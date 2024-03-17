@@ -1,11 +1,27 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace Online_Course_API.DTO
 {
-    public class GroupDTO
+    public class InstructorGroupsDTO
     {
-        [Key]
+        public int Course_ID { get; set; }
+
+
+        [Required(ErrorMessage = "Course name is required")]
+        [StringLength(50, MinimumLength = 3, ErrorMessage = "Course name must be between 3 and 50 characters")]
+        public string Course_Name { get; set; }
+
+        public int Grade_ID { get; set; }
+
+        [Required(ErrorMessage = "Grade name is required")]
+        [StringLength(50, ErrorMessage = "Grade name must be between 3 and 50 characters", MinimumLength = 3)]
+        public string Grade_Name { get; set; }
+
+        [Required(ErrorMessage = "Price is required")]
+        [Range(0, 1000, ErrorMessage = "Price must be a positive number")]
+
+        public float Price { get; set; }
+
         public int Group_ID { get; set; }
 
         [Required(ErrorMessage = "Group name is required")]
@@ -24,9 +40,7 @@ namespace Online_Course_API.DTO
         [DataType(DataType.Date)]
         public DateOnly End_Date { get; set; }
 
-        public int Instructor_ID { get; set; }
 
-        public int Course_ID { get; set; }
 
 
     }

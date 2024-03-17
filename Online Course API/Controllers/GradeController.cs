@@ -24,8 +24,15 @@ namespace Online_Course_API.Controllers
         [HttpGet]
         public IActionResult GetAll()
         {
-
-            return Ok(mapper.Map<IEnumerable<GradeDTO>>(context.Grades.ToList()));
+            try
+            {
+                return Ok(mapper.Map<IEnumerable<GradeDTO>>(context.Grades.ToList()));
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex);
+            }
+            
         }
 
 
@@ -39,7 +46,15 @@ namespace Online_Course_API.Controllers
             }
             else
             {
-                return Ok(mapper.Map<GradeDTO>(grade));
+                try
+                {
+                    return Ok(mapper.Map<GradeDTO>(grade));
+                }
+                catch (Exception ex)
+                {
+                    return BadRequest(ex);
+                }
+                
             }
         }
 
@@ -50,12 +65,20 @@ namespace Online_Course_API.Controllers
 
             if (ModelState.IsValid)
             {
-                context.Grades.Add(mapper.Map<Grade>(gradeDto));
-                context.SaveChanges();
+                try
+                {
+                    context.Grades.Add(mapper.Map<Grade>(gradeDto));
+                    context.SaveChanges();
 
-                string URL = Url.Action(nameof(GetOneByID), new { ID = gradeDto.Grade_ID });
+                    string URL = Url.Action(nameof(GetOneByID), new { ID = gradeDto.Grade_ID });
 
-                return Created(URL, gradeDto);
+                    return Created(URL, gradeDto);
+                }
+                catch (Exception ex)
+                {
+                    return BadRequest(ex);
+                }
+                
             }
             else
             {
@@ -74,12 +97,20 @@ namespace Online_Course_API.Controllers
                 Grade oldGrade = context.Grades.Find(ID);
                 if (oldGrade != null)
                 {
-                    gradeDto.Grade_ID = ID;
-                    mapper.Map(gradeDto, oldGrade);
-                    context.Grades.Update(oldGrade);
-                    context.SaveChanges();
+                    try
+                    {
+                        gradeDto.Grade_ID = ID;
+                        mapper.Map(gradeDto, oldGrade);
+                        context.Grades.Update(oldGrade);
+                        context.SaveChanges();
 
-                    return Ok();
+                        return Ok();
+                    }
+                    catch (Exception ex)
+                    {
+                        return BadRequest(ex);
+                    }
+                    
                 }
                 else
                 {
@@ -101,10 +132,18 @@ namespace Online_Course_API.Controllers
             Grade grade = context.Grades.Find(ID);
             if (grade != null)
             {
-                context.Grades.Remove(grade);
-                context.SaveChanges();
+                try
+                {
+                    context.Grades.Remove(grade);
+                    context.SaveChanges();
 
-                return Ok();
+                    return Ok();
+                }
+                catch (Exception ex)
+                {
+                    return BadRequest(ex);
+                }
+                
             }
             else
             {

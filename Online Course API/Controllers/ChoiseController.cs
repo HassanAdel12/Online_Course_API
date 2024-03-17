@@ -24,8 +24,15 @@ namespace Online_Course_API.Controllers
         [HttpGet]
         public IActionResult GetAll()
         {
-
-            return Ok(mapper.Map<IEnumerable<ChoiseDTO>>(context.Choises.ToList()));
+            try
+            {
+                return Ok(mapper.Map<IEnumerable<ChoiseDTO>>(context.Choises.ToList()));
+            }
+            catch(Exception ex) 
+            {
+                return BadRequest(ex);
+            }
+            
         }
 
 
@@ -39,7 +46,14 @@ namespace Online_Course_API.Controllers
             }
             else
             {
-                return Ok(mapper.Map<ChoiseDTO>(choise));
+                try
+                {
+                    return Ok(mapper.Map<ChoiseDTO>(choise));
+                }
+                catch (Exception ex)
+                {
+                    return BadRequest(ex);
+                }
             }
         }
 
@@ -50,12 +64,20 @@ namespace Online_Course_API.Controllers
 
             if (ModelState.IsValid)
             {
-                context.Choises.Add(mapper.Map<Choise>(choiseDto));
-                context.SaveChanges();
+                try
+                {
+                    context.Choises.Add(mapper.Map<Choise>(choiseDto));
+                    context.SaveChanges();
 
-                string URL = Url.Action(nameof(GetOneByID), new { ID = choiseDto.Choise_ID });
+                    string URL = Url.Action(nameof(GetOneByID), new { ID = choiseDto.Choise_ID });
 
-                return Created(URL, choiseDto);
+                    return Created(URL, choiseDto);
+                }
+                catch (Exception ex)
+                {
+                    return BadRequest(ex);
+                }
+                
             }
             else
             {
@@ -74,12 +96,20 @@ namespace Online_Course_API.Controllers
                 Choise oldChoise = context.Choises.Find(ID);
                 if (oldChoise != null)
                 {
-                    choiseDto.Choise_ID = ID;
-                    mapper.Map(choiseDto, oldChoise);
-                    context.Choises.Update(oldChoise);
-                    context.SaveChanges();
+                    try
+                    {
+                        choiseDto.Choise_ID = ID;
+                        mapper.Map(choiseDto, oldChoise);
+                        context.Choises.Update(oldChoise);
+                        context.SaveChanges();
 
-                    return Ok();
+                        return Ok();
+                    }
+                    catch (Exception ex)
+                    {
+                        return BadRequest(ex);
+                    }
+                    
                 }
                 else
                 {
@@ -101,10 +131,18 @@ namespace Online_Course_API.Controllers
             Choise choise = context.Choises.Find(ID);
             if (choise != null)
             {
-                context.Choises.Remove(choise);
-                context.SaveChanges();
+                try
+                {
+                    context.Choises.Remove(choise);
+                    context.SaveChanges();
 
-                return Ok();
+                    return Ok();
+                }
+                catch (Exception ex)
+                {
+                    return BadRequest(ex);
+                }
+                
             }
             else
             {

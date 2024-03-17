@@ -42,7 +42,23 @@ namespace Online_Course_API.Controllers
             return Ok(studentDTO);
         }
 
-      
+        [HttpGet("Group/{GroupID:int}")]
+        public IActionResult GetByGradeID(int GroupID)
+        {
+            try
+            {
+                return Ok(_mapper.Map<IEnumerable<StudentDTO>>(
+                    _context.Student_Groups
+                        .Where(sg => sg.Group_ID == GroupID).
+                        Select(sg => sg.Student)
+                    ));
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex);
+            }
+        }
+
         [HttpPost]
         public IActionResult PostStudent(StudentDTO studentDTO)
         {

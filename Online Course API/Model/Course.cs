@@ -16,8 +16,7 @@ namespace Online_Course_API.Model
         public string Description { get; set; }
 
 
-        //[Display(Name = "Duration ( days)")]
-        public DateTime Duration { get; set; }
+        public int Duration { get; set; }
 
 
         [Required(ErrorMessage = "Price is required")]
@@ -30,9 +29,9 @@ namespace Online_Course_API.Model
 
         public virtual Grade Grade { get; set; }
 
-        public virtual ICollection<Quiz> Quizzes { get; set; }
+        public virtual ICollection<Group> Groups { get; set; }
 
-        public virtual ICollection<Session> Sessions { get; set; }
+        public virtual ICollection<Quiz> Quizzes { get; set; }
 
         public virtual ICollection<Instructor_Course> Instructor_Courses { get; set; }
 

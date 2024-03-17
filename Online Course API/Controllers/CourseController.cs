@@ -23,10 +23,30 @@ namespace Online_Course_API.Controllers
         [HttpGet]
         public IActionResult GetAll()
         {
-
-            return Ok(mapper.Map<IEnumerable<CourseDTO>>(context.Courses.ToList()));
+            try
+            {
+                return Ok(mapper.Map<IEnumerable<CourseDTO>>(context.Courses.ToList()));
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex);
+            }
+            
         }
 
+        [HttpGet("Grade/{GradeID:int}")]
+        public IActionResult GetByGradeID(int GradeID)
+        {
+            try
+            {
+                return Ok(mapper.Map<IEnumerable<CourseDTO>>(
+                    context.Courses.Where(c => c.Grade_ID == GradeID).ToList()));
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex);
+            }
+        }
 
         [HttpGet("{ID:int}")]
         public IActionResult GetOneByID(int ID)
@@ -38,7 +58,15 @@ namespace Online_Course_API.Controllers
             }
             else
             {
-                return Ok(mapper.Map<CourseDTO>(course));
+                try
+                {
+                    return Ok(mapper.Map<CourseDTO>(course));
+                }
+                catch (Exception ex)
+                {
+                    return BadRequest(ex);
+                }
+                
             }
         }
 
@@ -49,12 +77,20 @@ namespace Online_Course_API.Controllers
 
             if (ModelState.IsValid)
             {
-                context.Courses.Add(mapper.Map<Course>(courseDto));
-                context.SaveChanges();
+                try
+                {
+                    context.Courses.Add(mapper.Map<Course>(courseDto));
+                    context.SaveChanges();
 
-                string URL = Url.Action(nameof(GetOneByID), new { ID = courseDto.Course_ID });
+                    string URL = Url.Action(nameof(GetOneByID), new { ID = courseDto.Course_ID });
 
-                return Created(URL, courseDto);
+                    return Created(URL, courseDto);
+                }
+                catch (Exception ex)
+                {
+                    return BadRequest(ex);
+                }
+                
             }
             else
             {
@@ -73,12 +109,20 @@ namespace Online_Course_API.Controllers
                 Course oldCourse = context.Courses.Find(ID);
                 if (oldCourse != null)
                 {
-                    courseDto.Course_ID = ID;
-                    mapper.Map(courseDto, oldCourse);
-                    context.Courses.Update(oldCourse);
-                    context.SaveChanges();
+                    try
+                    {
+                        courseDto.Course_ID = ID;
+                        mapper.Map(courseDto, oldCourse);
+                        context.Courses.Update(oldCourse);
+                        context.SaveChanges();
 
-                    return Ok();
+                        return Ok();
+                    }
+                    catch (Exception ex)
+                    {
+                        return BadRequest(ex);
+                    }
+                    
                 }
                 else
                 {
@@ -100,10 +144,18 @@ namespace Online_Course_API.Controllers
             Course course = context.Courses.Find(ID);
             if (course != null)
             {
-                context.Courses.Remove(course);
-                context.SaveChanges();
+                try
+                {
+                    context.Courses.Remove(course);
+                    context.SaveChanges();
 
-                return Ok();
+                    return Ok();
+                }
+                catch (Exception ex)
+                {
+                    return BadRequest(ex);
+                }
+                
             }
             else
             {

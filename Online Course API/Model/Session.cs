@@ -8,6 +8,10 @@ namespace Online_Course_API.Model
         [Key]
         public int Session_ID { get; set; }
 
+        [Required(ErrorMessage = "Group name is required")]
+        [StringLength(100, ErrorMessage = "Session name must be between 3 and 100 characters", MinimumLength = 3)]
+        public string SessionName { get; set; }
+
         [Required(ErrorMessage = "Start date is required")]
         [DataType(DataType.Date)]
         public DateTime Start_Date { get; set; }
@@ -20,10 +24,16 @@ namespace Online_Course_API.Model
         [Range(0, 5, ErrorMessage = "Rate must be a non-negative number")]
         public float Rate { get; set; }
 
-        [ForeignKey("Course")]
-        public int Course_ID { get; set; }
+        [ForeignKey("Instructor")]
+        public int? Instructor_ID { get; set; }
 
-        public virtual Course Course { get; set; }
+        public virtual Instructor Instructor { get; set; }
+
+
+        [ForeignKey("Group")]
+        public int Group_ID { get; set; }
+
+        public virtual Group Group { get; set; }
 
         public virtual ICollection<Student_Session> StudentSessions { get; set; }
 

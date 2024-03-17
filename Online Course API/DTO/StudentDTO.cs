@@ -37,10 +37,7 @@ namespace Online_Course_API.DTO
         public string Gender { get; set; }
 
         public int Parent_ID { get; set; }
-        //public String Parent_Email { get; set; }
 
-        //public String Parent_FirstName { get; set; }
-        //public String Parent_LastName { get; set;}
 
         
       
