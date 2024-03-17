@@ -8,7 +8,10 @@ namespace Online_Course_API.Mapper
     {
         public mapping()
         {
+<<<<<<< HEAD
 
+=======
+>>>>>>> 8f9efc5706c3cf968f4848b9666ee0f232b11791
             CreateMap<Instructor, InstructorDTO>().ReverseMap();
             CreateMap<Student, StudentDTO>().ReverseMap();
              //.ForMember(dest => dest.Parent_Email, opt => opt.MapFrom(src => src.Parent.Email))
@@ -24,7 +27,10 @@ namespace Online_Course_API.Mapper
 
             CreateMap<StudentQuizDTO, Student_Quiz>().ReverseMap();
             
+<<<<<<< HEAD
 
+=======
+>>>>>>> 8f9efc5706c3cf968f4848b9666ee0f232b11791
             CreateMap<Choise, ChoiseDTO>().ReverseMap();
             CreateMap<Course, CourseDTO>().ReverseMap();
             CreateMap<Grade, GradeDTO>().ReverseMap();

@@ -24,8 +24,15 @@ namespace Online_Course_API.Controllers
         [HttpGet]
         public IActionResult GetAll()
         {
-
-            return Ok(mapper.Map<IEnumerable<QuestionDTO>>(context.Questions.ToList()));
+            try
+            {
+                return Ok(mapper.Map<IEnumerable<QuestionDTO>>(context.Questions.ToList()));
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex);
+            }
+            
         }
 
 
@@ -39,7 +46,15 @@ namespace Online_Course_API.Controllers
             }
             else
             {
-                return Ok(mapper.Map<QuestionDTO>(question));
+                try
+                {
+                    return Ok(mapper.Map<QuestionDTO>(question));
+                }
+                catch (Exception ex)
+                {
+                    return BadRequest(ex);
+                }
+                
             }
         }
 
@@ -50,12 +65,20 @@ namespace Online_Course_API.Controllers
 
             if (ModelState.IsValid)
             {
-                context.Questions.Add(mapper.Map<Question>(questionDto));
-                context.SaveChanges();
+                try
+                {
+                    context.Questions.Add(mapper.Map<Question>(questionDto));
+                    context.SaveChanges();
 
-                string URL = Url.Action(nameof(GetOneByID), new { ID = questionDto.Question_ID });
+                    string URL = Url.Action(nameof(GetOneByID), new { ID = questionDto.Question_ID });
 
-                return Created(URL, questionDto);
+                    return Created(URL, questionDto);
+                }
+                catch (Exception ex)
+                {
+                    return BadRequest(ex);
+                }
+                
             }
             else
             {
@@ -74,12 +97,20 @@ namespace Online_Course_API.Controllers
                 Question oldQuestion = context.Questions.Find(ID);
                 if (oldQuestion != null)
                 {
-                    questionDto.Question_ID = ID;
-                    mapper.Map(questionDto, oldQuestion);
-                    context.Questions.Update(oldQuestion);
-                    context.SaveChanges();
+                    try
+                    {
+                        questionDto.Question_ID = ID;
+                        mapper.Map(questionDto, oldQuestion);
+                        context.Questions.Update(oldQuestion);
+                        context.SaveChanges();
 
-                    return Ok();
+                        return Ok();
+                    }
+                    catch (Exception ex)
+                    {
+                        return BadRequest(ex);
+                    }
+                    
                 }
                 else
                 {
@@ -101,10 +132,18 @@ namespace Online_Course_API.Controllers
             Question question = context.Questions.Find(ID);
             if (question != null)
             {
-                context.Questions.Remove(question);
-                context.SaveChanges();
+                try
+                {
+                    context.Questions.Remove(question);
+                    context.SaveChanges();
 
-                return Ok();
+                    return Ok();
+                }
+                catch (Exception ex)
+                {
+                    return BadRequest(ex);
+                }
+                
             }
             else
             {

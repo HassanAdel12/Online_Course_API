@@ -8,6 +8,10 @@ namespace Online_Course_API.DTO
         [Key]
         public int Session_ID { get; set; }
 
+        [Required(ErrorMessage = "Session name is required")]
+        [StringLength(100, ErrorMessage = "Session name must be between 3 and 100 characters", MinimumLength = 3)]
+        public string SessionName { get; set; }
+
         [Required(ErrorMessage = "Start date is required")]
         [DataType(DataType.Date)]
         public DateTime Start_Date { get; set; }
@@ -20,7 +24,8 @@ namespace Online_Course_API.DTO
         [Range(0, 5, ErrorMessage = "Rate must be a non-negative number")]
         public float Rate { get; set; }
 
-        [ForeignKey("Course")]
-        public int Course_ID { get; set; }
+        public int Instructor_ID { get; set; }
+
+        public int Group_ID { get; set; }
     }
 }

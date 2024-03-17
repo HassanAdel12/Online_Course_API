@@ -25,9 +25,17 @@ namespace Online_Course_API.Controllers
         [HttpGet]
         public ActionResult<IEnumerable<InstructorDTO>> GetInstructors()
         {
-            var instructors = _context.Instructors.ToList();
-            var instructorDTOs = _mapper.Map<List<InstructorDTO>>(instructors);
-            return Ok(instructorDTOs);
+            try
+            {
+                var instructors = _context.Instructors.ToList();
+                var instructorDTOs = _mapper.Map<List<InstructorDTO>>(instructors);
+                return Ok(instructorDTOs);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex);
+            }
+            
         }
 
         [Authorize(Roles = "Instructor")]
@@ -43,8 +51,16 @@ namespace Online_Course_API.Controllers
                 return NotFound();
             }
 
-            var instructorDTO = _mapper.Map<InstructorDTO>(instructor);
-            return Ok(instructorDTO);
+            try
+            {
+                var instructorDTO = _mapper.Map<InstructorDTO>(instructor);
+                return Ok(instructorDTO);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex);
+            }
+            
         }
 
         [Authorize(Roles = "Instructor")]
@@ -56,13 +72,21 @@ namespace Online_Course_API.Controllers
                 return BadRequest(ModelState);
             }
 
-            var instructor = _mapper.Map<Instructor>(instructorDTO);
+            try
+            {
+                var instructor = _mapper.Map<Instructor>(instructorDTO);
 
-            _context.Instructors.Add(instructor);
-            _context.SaveChanges();
+                _context.Instructors.Add(instructor);
+                _context.SaveChanges();
 
-            var createdInstructorDTO = _mapper.Map<InstructorDTO>(instructor);
-            return CreatedAtAction(nameof(GetInstructor), new { id = instructor.Instructor_ID }, createdInstructorDTO);
+                var createdInstructorDTO = _mapper.Map<InstructorDTO>(instructor);
+                return CreatedAtAction(nameof(GetInstructor), new { id = instructor.Instructor_ID }, createdInstructorDTO);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex);
+            }
+            
         }
         [Authorize(Roles = "Instructor")]
         [HttpPut("{id}")]
@@ -80,10 +104,18 @@ namespace Online_Course_API.Controllers
                 return NotFound();
             }
 
-            _mapper.Map(instructorDTO, instructor);
-            _context.SaveChanges();
+            try
+            {
+                _mapper.Map(instructorDTO, instructor);
+                _context.SaveChanges();
 
-            return NoContent();
+                return NoContent();
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex);
+            }
+            
         }
 
         [HttpDelete("{id}")]
@@ -96,10 +128,19 @@ namespace Online_Course_API.Controllers
                 return NotFound();
             }
 
-            _context.Instructors.Remove(instructor);
-            _context.SaveChanges();
+            try
+            {
+                _context.Instructors.Remove(instructor);
+                _context.SaveChanges();
 
-            return NoContent();
+                return NoContent();
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex);
+            }
+
+            
         }
 
         //[HttpGet]

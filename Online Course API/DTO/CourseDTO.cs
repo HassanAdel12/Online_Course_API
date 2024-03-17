@@ -15,7 +15,7 @@ namespace Online_Course_API.DTO
         [StringLength(500, ErrorMessage = "Description cannot exceed 500 characters")]
         public string Description { get; set; }
 
-        public DateTime Duration { get; set; }
+        public int Duration { get; set; }
 
 
         [Required(ErrorMessage = "Price is required")]

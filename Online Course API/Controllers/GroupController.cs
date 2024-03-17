@@ -26,8 +26,15 @@ namespace Online_Course_API.Controllers
         [HttpGet]
         public IActionResult GetAll()
         {
-
-            return Ok(mapper.Map<IEnumerable<GroupDTO>>(context.Groups.ToList()));
+            try
+            {
+                return Ok(mapper.Map<IEnumerable<GroupDTO>>(context.Groups.ToList()));
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex);
+            }
+            
         }
 
         [Authorize(Roles = "Student")]
@@ -42,7 +49,15 @@ namespace Online_Course_API.Controllers
             }
             else
             {
-                return Ok(mapper.Map<GroupDTO>(group));
+                try
+                {
+                    return Ok(mapper.Map<GroupDTO>(group));
+                }
+                catch (Exception ex)
+                {
+                    return BadRequest(ex);
+                }
+                
             }
         }
 
@@ -53,12 +68,33 @@ namespace Online_Course_API.Controllers
 
             if (ModelState.IsValid)
             {
-                context.Groups.Add(mapper.Map<Group>(groupDto));
-                context.SaveChanges();
+                try
+                {
+                    Instructor_Course instructorCourse = context.Instructor_Courses
+                        .FirstOrDefault(IC => IC.Instructor_ID == groupDto.Instructor_ID
+                                     && IC.Course_ID == groupDto.Course_ID);
+                    if (instructorCourse == null)
+                    {
+                        context.Instructor_Courses.Add(new Instructor_Course()
+                        {
+                            Instructor_ID = groupDto.Instructor_ID,
+                            Course_ID = groupDto.Course_ID
+                        });
+                    }
+                    int durationMonth = context.Courses.Find(groupDto.Course_ID).Duration;
+                    groupDto.End_Date = groupDto.Creation_Date.AddMonths(durationMonth);
+                    context.Groups.Add(mapper.Map<Group>(groupDto));
+                    context.SaveChanges();
 
-                string URL = Url.Action(nameof(GetOneByID), new { ID = groupDto.Group_ID });
+                    string URL = Url.Action(nameof(GetOneByID), new { ID = groupDto.Group_ID });
 
-                return Created(URL, groupDto);
+                    return Created(URL, groupDto);
+                }
+                catch (Exception ex)
+                {
+                    return BadRequest(ex);
+                }
+                
             }
             else
             {
@@ -78,12 +114,20 @@ namespace Online_Course_API.Controllers
                 Group oldGroup = context.Groups.Find(ID);
                 if (oldGroup != null)
                 {
-                    groupDto.Group_ID = ID;
-                    mapper.Map(groupDto, oldGroup);
-                    context.Groups.Update(oldGroup);
-                    context.SaveChanges();
+                    try
+                    {
+                        groupDto.Group_ID = ID;
+                        mapper.Map(groupDto, oldGroup);
+                        context.Groups.Update(oldGroup);
+                        context.SaveChanges();
 
-                    return Ok();
+                        return Ok();
+                    }
+                    catch (Exception ex)
+                    {
+                        return BadRequest(ex);
+                    }
+                    
                 }
                 else
                 {
@@ -106,10 +150,18 @@ namespace Online_Course_API.Controllers
             Group group = context.Groups.Find(ID);
             if (group != null)
             {
-                context.Groups.Remove(group);
-                context.SaveChanges();
+                try
+                {
+                    context.Groups.Remove(group);
+                    context.SaveChanges();
 
-                return Ok();
+                    return Ok();
+                }
+                catch (Exception ex)
+                {
+                    return BadRequest(ex);
+                }
+                
             }
             else
             {

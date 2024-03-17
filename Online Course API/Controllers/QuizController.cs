@@ -26,8 +26,15 @@ namespace Online_Course_API.Controllers
         [HttpGet]
         public IActionResult GetAll()
         {
-
-            return Ok(mapper.Map<IEnumerable<QuizDTO>>(context.Quizzes.ToList()));
+            try
+            {
+                return Ok(mapper.Map<IEnumerable<QuizDTO>>(context.Quizzes.ToList()));
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex);
+            }
+            
         }
 
         [Authorize(Roles = "Parent")]
@@ -41,7 +48,15 @@ namespace Online_Course_API.Controllers
             }
             else
             {
-                return Ok(mapper.Map<QuizDTO>(quiz));
+                try
+                {
+                    return Ok(mapper.Map<QuizDTO>(quiz));
+                }
+                catch (Exception ex)
+                {
+                    return BadRequest(ex);
+                }
+                
             }
         }
 
@@ -52,12 +67,20 @@ namespace Online_Course_API.Controllers
 
             if (ModelState.IsValid)
             {
-                context.Quizzes.Add(mapper.Map<Quiz>(quizDto));
-                context.SaveChanges();
+                try
+                {
+                    context.Quizzes.Add(mapper.Map<Quiz>(quizDto));
+                    context.SaveChanges();
 
-                string URL = Url.Action(nameof(GetOneByID), new { ID = quizDto.Quiz_ID });
+                    string URL = Url.Action(nameof(GetOneByID), new { ID = quizDto.Quiz_ID });
 
-                return Created(URL, quizDto);
+                    return Created(URL, quizDto);
+                }
+                catch (Exception ex)
+                {
+                    return BadRequest(ex);
+                }
+                
             }
             else
             {
@@ -76,12 +99,20 @@ namespace Online_Course_API.Controllers
                 Quiz oldQuiz = context.Quizzes.Find(ID);
                 if (oldQuiz != null)
                 {
-                    quizDto.Quiz_ID = ID;
-                    mapper.Map(quizDto, oldQuiz);
-                    context.Quizzes.Update(oldQuiz);
-                    context.SaveChanges();
+                    try
+                    {
+                        quizDto.Quiz_ID = ID;
+                        mapper.Map(quizDto, oldQuiz);
+                        context.Quizzes.Update(oldQuiz);
+                        context.SaveChanges();
 
-                    return Ok();
+                        return Ok();
+                    }
+                    catch (Exception ex)
+                    {
+                        return BadRequest(ex);
+                    }
+                    
                 }
                 else
                 {
@@ -103,10 +134,18 @@ namespace Online_Course_API.Controllers
             Quiz quiz = context.Quizzes.Find(ID);
             if (quiz != null)
             {
-                context.Quizzes.Remove(quiz);
-                context.SaveChanges();
+                try
+                {
+                    context.Quizzes.Remove(quiz);
+                    context.SaveChanges();
 
-                return Ok();
+                    return Ok();
+                }
+                catch (Exception ex)
+                {
+                    return BadRequest(ex);
+                }
+                
             }
             else
             {
