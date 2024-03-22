@@ -78,7 +78,6 @@ namespace Online_Course_API.Controllers
             }
         }
 
-<<<<<<< HEAD
         [Authorize(Roles = "Instructor")]
 
         [HttpPost]
