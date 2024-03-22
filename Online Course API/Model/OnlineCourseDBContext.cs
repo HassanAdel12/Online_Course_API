@@ -70,11 +70,10 @@ namespace Online_Course_API.Model
             //    .HasKey(m => new { m.Student_ID, m.Session_ID });
             base.OnModelCreating(modelBuilder);
 
-            // Configure primary key for IdentityUserLogin<string>
+         
             modelBuilder.Entity<IdentityUserLogin<string>>()
                 .HasKey(l => new { l.LoginProvider, l.ProviderKey });
 
-            // Configure other entities and their relationships...
             modelBuilder.Entity<Instructor_Course>()
                 .HasKey(m => new { m.Instructor_ID, m.Course_ID });
 

@@ -32,6 +32,8 @@ namespace Online_Course_API.Mapper
             CreateMap<Question, QuestionDTO>().ReverseMap();
             CreateMap<Quiz, QuizDTO>().ReverseMap();
 
+
+            CreateMap<Student_Group, Student_GroupDTO>().ReverseMap();
         }
     }
 }

@@ -20,6 +20,12 @@ namespace Online_Course_API.DTO
         [DataType(DataType.Date)]
         public DateOnly Creation_Date { get; set; }
 
+
+        [Required(ErrorMessage = "Price is required")]
+        [Range(0, 1000, ErrorMessage = "Price must be a positive number")]
+        public float Price { get; set; }
+
+
         [Required(ErrorMessage = "End date is required")]
         [DataType(DataType.Date)]
         public DateOnly End_Date { get; set; }

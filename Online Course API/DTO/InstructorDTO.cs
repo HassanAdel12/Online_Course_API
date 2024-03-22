@@ -32,7 +32,25 @@ namespace Online_Course_API.DTO
         [RegularExpression("^(Male|Female)$", ErrorMessage = "Invalid gender")]
         public string Gender { get; set; }
 
+        [Required(ErrorMessage = "Please enter your birth date")]
+        [DataType(DataType.Date)]
+        public DateTime BirthDate { get; set; }
 
+        [Required(ErrorMessage = "Please enter About yourself")]
+        [StringLength(200)]
+        public string AboutMe { get; set; }
+
+        
+        [StringLength(50)]
+        public string Address { get; set; }
+
+        [Required(ErrorMessage = "Please enter your country")]
+        [StringLength(50)]
+        public string Country { get; set; }
+
+        [Required(ErrorMessage = "Please enter your city")]
+        [StringLength(50)]
+        public string City { get; set; }
 
 
 
