@@ -33,7 +33,7 @@ namespace Online_Course_API.Controllers
                                 Course_Name = g.Course.Name,
                                 Grade_ID = g.Course.Grade_ID,
                                 Grade_Name = g.Course.Grade.Grade_Name,
-                                Price = g.Course.Price,
+                                Price = g.Price,
                                 Group_ID = g.Group_ID,
                                 GroupName = g.GroupName,
                                 Num_Students = g.Num_Students,

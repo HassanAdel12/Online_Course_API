@@ -19,10 +19,7 @@ namespace Online_Course_API.Model
         public int Duration { get; set; }
 
 
-        [Required(ErrorMessage = "Price is required")]
-        [Range(0, 1000, ErrorMessage = "Price must be a positive number")]
-
-        public float Price { get; set; }
+       
 
         [ForeignKey("Grade")]
         public int Grade_ID { get; set; }
