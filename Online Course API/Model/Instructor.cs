@@ -33,7 +33,6 @@ namespace Online_Course_API.Model
         [RegularExpression("^(Male|Female)$", ErrorMessage = "Invalid gender")]
         public string Gender { get; set; }
 
-
         public virtual ICollection<Group>? Groups { get; set; }
 
         public virtual ICollection<Session>? Sessions { get; set; }

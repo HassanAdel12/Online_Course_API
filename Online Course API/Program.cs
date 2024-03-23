@@ -86,6 +86,7 @@ namespace Online_Course_API
             app.UseAuthentication();//Check JWT token
             app.UseAuthorization();
 
+            app.UseCors("MyPolicy");
 
             app.MapControllers();
 
