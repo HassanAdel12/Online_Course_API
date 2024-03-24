@@ -16,7 +16,7 @@ namespace Online_Course_API.Model
         [StringLength(50, MinimumLength = 2, ErrorMessage = "Last name must be between 2 and 50 characters")]
         public string Last_Name { get; set; }
 
-        [RegularExpression(@"^01\d{9}$", ErrorMessage = "Phone number must start with 01 and be 11 digits long")]
+        [RegularExpression(@"^01\d{9}$", ErrorMessage = "Phone number must start with 01 and be 11 digits ")]
         public string Phone { get; set; }
 
 
@@ -26,7 +26,7 @@ namespace Online_Course_API.Model
         public string Email { get; set; }
 
         [Required(ErrorMessage = "Password is required")]
-        [RegularExpression(@"^.{6,20}$", ErrorMessage = "Password must be between 6 and 20 characters long")]
+        [RegularExpression(@"^.{6,20}$", ErrorMessage = "Password must be between 6 and 20 characters ")]
         [DataType(DataType.Password)]
         public string Password { get; set; }
 

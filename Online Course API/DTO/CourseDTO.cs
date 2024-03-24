@@ -12,7 +12,7 @@ namespace Online_Course_API.DTO
         [StringLength(50, MinimumLength = 3, ErrorMessage = "Course name must be between 3 and 50 characters")]
         public string Name { get; set; }
 
-        [StringLength(500, ErrorMessage = "Description cannot exceed 500 characters")]
+        [StringLength(500, ErrorMessage = "Description must atmost 500 characters")]
         public string Description { get; set; }
 
         public int Duration { get; set; }

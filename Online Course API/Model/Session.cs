@@ -21,7 +21,7 @@ namespace Online_Course_API.Model
         public DateTime End_at { get; set; }
 
         [Required(ErrorMessage = "Rate is required")]
-        [Range(0, 5, ErrorMessage = "Rate must be a non-negative number")]
+        [Range(0, 5, ErrorMessage = "Rate must be a positive number")]
         public float Rate { get; set; }
 
         [ForeignKey("Instructor")]

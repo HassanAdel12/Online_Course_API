@@ -68,7 +68,7 @@ namespace Online_Course_API.Controllers
                 return NotFound();
             }
 
-            _mapper.Map(studentGroupDTO, existingStudentGroup); // Update existingStudentGroup with data from studentGroupDTO
+            _mapper.Map(studentGroupDTO, existingStudentGroup);
 
             await _context.SaveChangesAsync();
 

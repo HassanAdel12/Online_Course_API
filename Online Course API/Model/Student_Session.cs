@@ -17,16 +17,16 @@ namespace Online_Course_API.Model
         [Key]
         [Column(Order = 1)]
         [ForeignKey("Session")]
-        [Required(ErrorMessage = "Session ID is required.")]
+        [Required(ErrorMessage = "Session ID is required")]
         public int Session_ID { get; set; }
 
       
         public virtual Session Session { get; set; }
 
-        [Range(0, 5, ErrorMessage = "Rate must be between 0 and 5.")]
+        [Range(0, 5, ErrorMessage = "Rate must be between 0 and 5")]
         public float Rate { get; set; }
 
-        [StringLength(200, ErrorMessage = "Comment length cannot exceed 200 characters.")]
+        [StringLength(200, ErrorMessage = "Comment length must be at most 200 characters")]
         public string Comment { get; set; }
 
 
