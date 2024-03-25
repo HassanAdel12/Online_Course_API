@@ -25,7 +25,7 @@ namespace Online_Course_API
            
 
             builder.Services.AddControllers();
-            // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
+        
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
 
@@ -33,7 +33,7 @@ namespace Online_Course_API
             {
                 Options.UseSqlServer(builder.Configuration.GetConnectionString("Default"));
             });
-<<<<<<< HEAD
+
             builder.Services.AddIdentity<ApplicationUser, IdentityRole>()
                 .AddEntityFrameworkStores<OnlineCourseDBContext>();
 
@@ -74,8 +74,7 @@ namespace Online_Course_API
                 });
             });
             builder.Services.AddAutoMapper(typeof(Program));
-=======
->>>>>>> 8f9efc5706c3cf968f4848b9666ee0f232b11791
+
 
             builder.Services.AddAutoMapper(typeof(Program));
 
@@ -87,7 +86,7 @@ namespace Online_Course_API
                 app.UseSwagger();
                 app.UseSwaggerUI();
             }
-            app.UseAuthentication();//Check JWT token
+            app.UseAuthentication();
             app.UseAuthorization();
 
 
