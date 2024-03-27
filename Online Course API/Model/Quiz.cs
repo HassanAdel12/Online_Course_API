@@ -19,10 +19,10 @@ namespace Online_Course_API.Model
         public virtual Instructor Instructor { get; set; }
 
 
-        [ForeignKey("Course")]
-        public int Course_ID { get; set; }
+        [ForeignKey("Group")]
+        public int Group_ID { get; set; }
 
-        public virtual Course Course { get; set; }
+        public virtual Group Group { get; set; }
 
         public virtual ICollection<Question> Questions { get; set; }
 

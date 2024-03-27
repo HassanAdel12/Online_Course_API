@@ -42,10 +42,9 @@ namespace Online_Course_API.Model
         [ForeignKey("Course")]
         public int Course_ID { get; set; }
        
-       
         public virtual Course Course { get; set; }
 
-       
+        public virtual ICollection<Quiz> Quizzes { get; set; }
         public virtual ICollection<Student_Group> StudentGroups { get; set; }
 
         public virtual ICollection<Session> Sessions { get; set; }

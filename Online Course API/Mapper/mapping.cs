@@ -28,10 +28,19 @@ namespace Online_Course_API.Mapper
             CreateMap<Group, CourseGroupesDTO>()
                 .ForMember(dest => dest.InstructorName, opt => opt.MapFrom(src => src.Instructor.First_Name))
                 .ForMember(dest => dest.courseName, opt => opt.MapFrom(src => src.Course.Name));
-            
-        
 
-        CreateMap<Choise, ChoiseDTO>().ReverseMap();
+            CreateMap<Quiz, AllExamByGroupDTO>().ReverseMap();
+
+            CreateMap<Session, ALlSessionDTO>().ReverseMap();
+
+            CreateMap<Question, AllQuestionsinExamDTO>()
+            .ForMember(dest => dest.ChoisesText,
+                       opt => opt.MapFrom(src => src.Choises.Select(c => c.Text)));
+
+
+
+
+            CreateMap<Choise, ChoiseDTO>().ReverseMap();
             CreateMap<Course, CourseDTO>().ReverseMap();
             CreateMap<Grade, GradeDTO>().ReverseMap();
             CreateMap<Group, GroupDTO>().ReverseMap();

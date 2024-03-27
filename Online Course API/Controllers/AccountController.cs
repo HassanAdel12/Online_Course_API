@@ -55,7 +55,7 @@ namespace Online_Course_API.Controllers
 
 
                         await usermanger.AddToRoleAsync(user, userDto.Role);
-                        return Ok($"User account created successfully with role: {userDto.Role}");
+                        return Ok();
 
                     }
                     else

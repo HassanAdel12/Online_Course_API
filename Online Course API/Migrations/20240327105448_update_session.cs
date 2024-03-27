@@ -5,21 +5,21 @@
 namespace Online_Course_API.Migrations
 {
     /// <inheritdoc />
-    public partial class groupupdate : Migration
+    public partial class update_session : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.AddColumn<string>(
-                name: "InstructorName",
-                table: "Groups",
+                name: "OnlineVideo",
+                table: "Sessions",
                 type: "nvarchar(max)",
                 nullable: false,
                 defaultValue: "");
 
             migrationBuilder.AddColumn<string>(
-                name: "courseName",
-                table: "Groups",
+                name: "Zoom",
+                table: "Sessions",
                 type: "nvarchar(max)",
                 nullable: false,
                 defaultValue: "");
@@ -29,12 +29,12 @@ namespace Online_Course_API.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropColumn(
-                name: "InstructorName",
-                table: "Groups");
+                name: "OnlineVideo",
+                table: "Sessions");
 
             migrationBuilder.DropColumn(
-                name: "courseName",
-                table: "Groups");
+                name: "Zoom",
+                table: "Sessions");
         }
     }
 }

@@ -12,8 +12,8 @@ using Online_Course_API.Model;
 namespace Online_Course_API.Migrations
 {
     [DbContext(typeof(OnlineCourseDBContext))]
-    [Migration("20240322171112_update instructor")]
-    partial class updateinstructor
+    [Migration("20240327092438_u")]
+    partial class u
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -487,7 +487,7 @@ namespace Online_Course_API.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Quiz_ID"));
 
-                    b.Property<int>("Course_ID")
+                    b.Property<int>("Group_ID")
                         .HasColumnType("int");
 
                     b.Property<int>("Instructor_ID")
@@ -500,7 +500,7 @@ namespace Online_Course_API.Migrations
 
                     b.HasKey("Quiz_ID");
 
-                    b.HasIndex("Course_ID");
+                    b.HasIndex("Group_ID");
 
                     b.HasIndex("Instructor_ID");
 
@@ -815,10 +815,9 @@ namespace Online_Course_API.Migrations
 
             modelBuilder.Entity("Online_Course_API.Model.Quiz", b =>
                 {
-                    b.HasOne("Online_Course_API.Model.Course", "Course")
+                    b.HasOne("Online_Course_API.Model.Group", "Group")
                         .WithMany("Quizzes")
-                        .HasForeignKey("Course_ID")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .HasForeignKey("Group_ID")
                         .IsRequired();
 
                     b.HasOne("Online_Course_API.Model.Instructor", "Instructor")
@@ -827,7 +826,7 @@ namespace Online_Course_API.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Course");
+                    b.Navigation("Group");
 
                     b.Navigation("Instructor");
                 });
@@ -961,8 +960,6 @@ namespace Online_Course_API.Migrations
 
                     b.Navigation("Instructor_Courses");
 
-                    b.Navigation("Quizzes");
-
                     b.Navigation("StudentCourses");
                 });
 
@@ -973,6 +970,8 @@ namespace Online_Course_API.Migrations
 
             modelBuilder.Entity("Online_Course_API.Model.Group", b =>
                 {
+                    b.Navigation("Quizzes");
+
                     b.Navigation("Sessions");
 
                     b.Navigation("StudentGroups");

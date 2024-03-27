@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 
 namespace Online_Course_API.Model
 {
@@ -51,9 +52,30 @@ namespace Online_Course_API.Model
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            base.OnModelCreating(modelBuilder);
 
-         
+            modelBuilder.Entity<Quiz>()
+    .HasOne(q => q.Group)
+    .WithMany(g => g.Quizzes)
+    .HasForeignKey(q => q.Group_ID)
+    .OnDelete(DeleteBehavior.ClientSetNull);
+
+            modelBuilder.Entity<Group>()
+                .HasMany(g => g.Quizzes)
+                .WithOne(q => q.Group)
+                .HasForeignKey(q => q.Group_ID)
+                .OnDelete(DeleteBehavior.ClientSetNull);
+
+
+
+            base.OnModelCreating(modelBuilder);
+    
+
+
+
+           
+
+
+
             modelBuilder.Entity<IdentityUserLogin<string>>()
                 .HasKey(l => new { l.LoginProvider, l.ProviderKey });
 

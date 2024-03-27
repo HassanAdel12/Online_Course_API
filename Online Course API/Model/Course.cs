@@ -28,7 +28,7 @@ namespace Online_Course_API.Model
 
         public virtual ICollection<Group> Groups { get; set; }
 
-        public virtual ICollection<Quiz> Quizzes { get; set; }
+       
 
         public virtual ICollection<Instructor_Course> Instructor_Courses { get; set; }
 
