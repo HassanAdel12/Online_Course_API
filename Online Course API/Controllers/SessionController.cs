@@ -9,7 +9,7 @@ namespace Online_Course_API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    [Authorize]
+    //[Authorize]
     public class SessionController : ControllerBase
     {
         private readonly OnlineCourseDBContext _context;

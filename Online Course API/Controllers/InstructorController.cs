@@ -10,7 +10,7 @@ namespace Online_Course_API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    [Authorize]
+    //[Authorize]
     public class InstructorController : ControllerBase
     {
         private readonly OnlineCourseDBContext _context;
@@ -38,9 +38,9 @@ namespace Online_Course_API.Controllers
             
         }
 
-        [Authorize(Roles = "Instructor")]
-        [Authorize(Roles = "Student")]
-        [Authorize(Roles = "Parent")]
+        //[Authorize(Roles = "Instructor")]
+        //[Authorize(Roles = "Student")]
+        //[Authorize(Roles = "Parent")]
         [HttpGet("{id}")]
         public ActionResult<InstructorDTO> GetInstructor(int id)
         {

@@ -33,7 +33,6 @@ namespace Online_Course_API
             {
                 Options.UseSqlServer(builder.Configuration.GetConnectionString("Default"));
             });
-
             builder.Services.AddIdentity<ApplicationUser, IdentityRole>()
                 .AddEntityFrameworkStores<OnlineCourseDBContext>();
 
@@ -73,13 +72,12 @@ namespace Online_Course_API
                     corsPolicyBuilder.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod();
                 });
             });
-            builder.Services.AddAutoMapper(typeof(Program));
-
+ 
 
             builder.Services.AddAutoMapper(typeof(Program));
 
             var app = builder.Build();
-            app.UseCors("MyPolicy");
+
 
             if (app.Environment.IsDevelopment())
             {
@@ -89,6 +87,7 @@ namespace Online_Course_API
             app.UseAuthentication();
             app.UseAuthorization();
 
+            app.UseCors("MyPolicy");
 
             app.MapControllers();
 
