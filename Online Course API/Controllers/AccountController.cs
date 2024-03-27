@@ -49,6 +49,11 @@ namespace Online_Course_API.Controllers
                             await roleManager.CreateAsync(new IdentityRole(userDto.Role));
                         }
 
+                        //await usermanger.AddToRoleAsync(user, userDto.Role);
+                        //var message = $"User account created successfully with role: {userDto.Role}";
+                        //return Ok(new { message });
+
+
                         await usermanger.AddToRoleAsync(user, userDto.Role);
                         return Ok($"User account created successfully with role: {userDto.Role}");
 

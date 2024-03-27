@@ -79,8 +79,8 @@ namespace Online_Course_API
             builder.Services.AddAutoMapper(typeof(Program));
 
             var app = builder.Build();
+            app.UseCors("MyPolicy");
 
-           
             if (app.Environment.IsDevelopment())
             {
                 app.UseSwagger();
