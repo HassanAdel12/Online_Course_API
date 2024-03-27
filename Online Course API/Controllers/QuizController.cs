@@ -9,7 +9,7 @@ namespace Online_Course_API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    [Authorize]
+    //[Authorize]
     public class QuizController : ControllerBase
     {
 
@@ -22,7 +22,7 @@ namespace Online_Course_API.Controllers
             context = _context;
             mapper = _mapper;
         }
-        [Authorize(Roles = "Instructor")]
+        //[Authorize(Roles = "Instructor")]
         [HttpGet]
         public IActionResult GetAll()
         {
@@ -37,7 +37,7 @@ namespace Online_Course_API.Controllers
             
         }
 
-        [Authorize(Roles = "Parent")]
+        //[Authorize(Roles = "Parent")]
         [HttpGet("{ID:int}")]
         public IActionResult GetOneByID(int ID)
         {
@@ -60,7 +60,7 @@ namespace Online_Course_API.Controllers
             }
         }
 
-        [Authorize(Roles = "Instructor")]
+        //[Authorize(Roles = "Instructor")]
         [HttpPost]
         public IActionResult Add(QuizDTO quizDto)
         {
@@ -88,7 +88,7 @@ namespace Online_Course_API.Controllers
             }
         }
 
-        [Authorize(Roles = "Instructor")]
+        //[Authorize(Roles = "Instructor")]
         [HttpPut("{ID:int}")]
         public IActionResult Update(QuizDTO quizDto, int ID)
         {
@@ -126,7 +126,7 @@ namespace Online_Course_API.Controllers
             }
         }
 
-        [Authorize(Roles = "Instructor")]
+        //[Authorize(Roles = "Instructor")]
         [HttpDelete("{ID:int}")]
         public IActionResult Delete(int ID)
         {

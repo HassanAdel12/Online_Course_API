@@ -9,7 +9,7 @@ namespace Online_Course_API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    [Authorize]
+    //[Authorize]
     public class GroupController : ControllerBase
     {
         private readonly OnlineCourseDBContext context;
@@ -21,8 +21,8 @@ namespace Online_Course_API.Controllers
             context = _context;
             mapper = _mapper;
         }
-        [Authorize(Roles = "Student")]
-        [Authorize(Roles = "Instructor")]
+        //[Authorize(Roles = "Student")]
+        //[Authorize(Roles = "Instructor")]
         [HttpGet]
         public IActionResult GetAll()
         {
@@ -37,8 +37,8 @@ namespace Online_Course_API.Controllers
             
         }
 
-        [Authorize(Roles = "Student")]
-        [Authorize(Roles = "Instructor")]
+        //[Authorize(Roles = "Student")]
+        //[Authorize(Roles = "Instructor")]
         [HttpGet("{ID:int}")]
         public IActionResult GetOneByID(int ID)
         {
