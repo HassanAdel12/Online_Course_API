@@ -61,7 +61,7 @@ namespace Online_Course_API.Controllers
             }
         }
 
-        [Authorize(Roles = "Instructor")]
+        //[Authorize(Roles = "Instructor")]
         [HttpPost]
         public IActionResult Add(GroupDTO groupDto)
         {
@@ -103,7 +103,7 @@ namespace Online_Course_API.Controllers
         }
 
        
-        [Authorize(Roles = "Instructor")]
+        //[Authorize(Roles = "Instructor")]
         [HttpPut("{ID:int}")]
         public IActionResult Update(GroupDTO groupDto, int ID)
         {
@@ -142,7 +142,7 @@ namespace Online_Course_API.Controllers
         }
 
        
-        [Authorize(Roles = "Instructor")]
+        //[Authorize(Roles = "Instructor")]
         [HttpDelete("{ID:int}")]
         public IActionResult Delete(int ID)
         {

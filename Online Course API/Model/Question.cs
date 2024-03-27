@@ -9,7 +9,7 @@ namespace Online_Course_API.Model
         public int Question_ID { get; set; }
 
         [Required(ErrorMessage = "Question text is required")]
-        [StringLength(200, ErrorMessage = "Question text cannot exceed 200 characters")]
+        [StringLength(200, ErrorMessage = "Question text must at most 200 characters")]
         public string Question_Text { get; set; }
 
         [ForeignKey("Quiz")]

@@ -14,7 +14,7 @@ namespace Online_Course_API.DTO
         [Key]
         [Column(Order = 1)]
         [ForeignKey("Question")]
-        [Required(ErrorMessage = "Question ID is required.")]
+        [Required(ErrorMessage = "Question ID is required")]
         public int Question_ID { get; set; }
 
 

@@ -51,23 +51,6 @@ namespace Online_Course_API.Model
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            //modelBuilder.Entity<Instructor_Course>()
-            //    .HasKey(m => new { m.Instructor_ID, m.Course_ID });
-
-            //modelBuilder.Entity<Student_Course>()
-            //    .HasKey(m => new { m.Student_ID, m.Course_ID });
-
-            //modelBuilder.Entity<Student_Group>()
-            //    .HasKey(m => new { m.Student_ID, m.Group_ID });
-
-            //modelBuilder.Entity<Student_Question>()
-            //    .HasKey(m => new { m.Student_ID, m.Question_ID });
-
-            //modelBuilder.Entity<Student_Quiz>()
-            //    .HasKey(m => new { m.Student_ID, m.Quiz_ID });
-
-            //modelBuilder.Entity<Student_Session>()
-            //    .HasKey(m => new { m.Student_ID, m.Session_ID });
             base.OnModelCreating(modelBuilder);
 
          

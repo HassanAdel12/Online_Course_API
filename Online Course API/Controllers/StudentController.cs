@@ -39,7 +39,7 @@ namespace Online_Course_API.Controllers
             
         }
 
-        // GET: api/Students/5
+      
         [HttpGet("{id}")]
         public ActionResult<StudentDTO> GetStudent(int id)
         {
@@ -78,6 +78,7 @@ namespace Online_Course_API.Controllers
             }
         }
 
+<<<<<<< HEAD
         [Authorize(Roles = "Instructor")]
 
         [HttpPost]

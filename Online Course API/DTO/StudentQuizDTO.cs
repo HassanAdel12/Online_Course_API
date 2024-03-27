@@ -8,19 +8,19 @@ namespace Online_Course_API.DTO
     {
         [Key]
         [Column(Order = 0)]
-        [Required(ErrorMessage = "Student ID is required.")]
+        [Required(ErrorMessage = "Student ID is required")]
         public int Student_ID { get; set; }
 
 
         [Key]
         [Column(Order = 1)]
-        [Required(ErrorMessage = "Quiz ID is required.")]
+        [Required(ErrorMessage = "Quiz ID is required")]
         public int Quiz_ID { get; set; }
 
 
         
 
-        [Range(0, 100, ErrorMessage = "Grade must be between 0 and 100.")]
+        [Range(0, 100, ErrorMessage = "Grade must be between 0 and 100")]
         public float Grade { get; set; }
     }
 }

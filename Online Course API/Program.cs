@@ -25,7 +25,7 @@ namespace Online_Course_API
            
 
             builder.Services.AddControllers();
-            // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
+        
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
 
@@ -72,18 +72,19 @@ namespace Online_Course_API
                     corsPolicyBuilder.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod();
                 });
             });
+ 
 
             builder.Services.AddAutoMapper(typeof(Program));
 
             var app = builder.Build();
 
-           
+
             if (app.Environment.IsDevelopment())
             {
                 app.UseSwagger();
                 app.UseSwaggerUI();
             }
-            app.UseAuthentication();//Check JWT token
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.UseCors("MyPolicy");

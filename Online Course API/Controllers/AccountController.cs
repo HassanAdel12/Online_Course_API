@@ -34,7 +34,7 @@ namespace Online_Course_API.Controllers
             if (ModelState.IsValid)
             {
 
-                //save
+            
                 ApplicationUser user = new ApplicationUser();
                 user.UserName = userDto.UserName;
                 user.Email = userDto.Email;
@@ -48,6 +48,11 @@ namespace Online_Course_API.Controllers
                         {
                             await roleManager.CreateAsync(new IdentityRole(userDto.Role));
                         }
+
+                        //await usermanger.AddToRoleAsync(user, userDto.Role);
+                        //var message = $"User account created successfully with role: {userDto.Role}";
+                        //return Ok(new { message });
+
 
                         await usermanger.AddToRoleAsync(user, userDto.Role);
                         return Ok($"User account created successfully with role: {userDto.Role}");
@@ -74,14 +79,14 @@ namespace Online_Course_API.Controllers
         {
             if (ModelState.IsValid == true)
             {
-                //check - create token
+                
                 ApplicationUser user = await usermanger.FindByNameAsync(userDto.UserName);
                 if (user != null)
                 {
                     bool found = await usermanger.CheckPasswordAsync(user, userDto.Password);
                     if (found)
                     {
-                       // Claims Token
+                     
                         var claims = new List<Claim>();
 
                         claims.Add(new Claim(ClaimTypes.Role, "Instructor"));
@@ -93,7 +98,7 @@ namespace Online_Course_API.Controllers
                         claims.Add(new Claim(ClaimTypes.NameIdentifier, user.Id));
                         claims.Add(new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()));
           
-                        //get role
+                        
                         var roles = await usermanger.GetRolesAsync(user);
                         foreach (var itemRole in roles)
                         {
@@ -115,10 +120,10 @@ namespace Online_Course_API.Controllers
                     
                         var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(config["JWT:SecretKey"]));
                         var sc = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
-                        //Create token
+                        
                         JwtSecurityToken mytoken = new JwtSecurityToken(
-                            issuer: config["JWT:ValidIssuer"],//url web api
-                            audience: config["JWT:ValidAudiance"],//url consumer angular
+                            issuer: config["JWT:ValidIssuer"],
+                            audience: config["JWT:ValidAudiance"],
                             claims: claims,
                             expires: DateTime.Now.AddHours(1),
                                signingCredentials: sc
