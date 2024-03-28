@@ -12,8 +12,8 @@ using Online_Course_API.Model;
 namespace Online_Course_API.Migrations
 {
     [DbContext(typeof(OnlineCourseDBContext))]
-    [Migration("20240327092438_u")]
-    partial class u
+    [Migration("20240328033300_k")]
+    partial class k
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -346,29 +346,6 @@ namespace Online_Course_API.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Instructor_ID"));
 
-                    b.Property<string>("AboutMe")
-                        .IsRequired()
-                        .HasMaxLength(200)
-                        .HasColumnType("nvarchar(200)");
-
-                    b.Property<string>("Address")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
-
-                    b.Property<DateTime>("BirthDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("City")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
-
-                    b.Property<string>("Country")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
-
                     b.Property<string>("Email")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -379,11 +356,9 @@ namespace Online_Course_API.Migrations
                         .HasColumnType("nvarchar(50)");
 
                     b.Property<string>("Gender")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Last_Name")
-                        .IsRequired()
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
@@ -392,10 +367,16 @@ namespace Online_Course_API.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Phone")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("UserId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
                     b.HasKey("Instructor_ID");
+
+                    b.HasIndex("UserId")
+                        .IsUnique();
 
                     b.ToTable("Instructors");
                 });
@@ -524,6 +505,10 @@ namespace Online_Course_API.Migrations
                     b.Property<int?>("Instructor_ID")
                         .HasColumnType("int");
 
+                    b.Property<string>("OnlineVideo")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<float>("Rate")
                         .HasColumnType("real");
 
@@ -534,6 +519,10 @@ namespace Online_Course_API.Migrations
 
                     b.Property<DateTime>("Start_Date")
                         .HasColumnType("datetime2");
+
+                    b.Property<string>("Zoom")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Session_ID");
 
@@ -562,15 +551,13 @@ namespace Online_Course_API.Migrations
                         .HasColumnType("nvarchar(50)");
 
                     b.Property<string>("Gender")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Last_Name")
-                        .IsRequired()
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
-                    b.Property<int>("Parent_ID")
+                    b.Property<int?>("Parent_ID")
                         .HasColumnType("int");
 
                     b.Property<string>("Password")
@@ -578,12 +565,18 @@ namespace Online_Course_API.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Phone")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("UserId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
 
                     b.HasKey("Student_ID");
 
                     b.HasIndex("Parent_ID");
+
+                    b.HasIndex("UserId")
+                        .IsUnique();
 
                     b.ToTable("Students");
                 });
@@ -601,9 +594,14 @@ namespace Online_Course_API.Migrations
                     b.Property<DateTime>("Enroll_Date")
                         .HasColumnType("datetime2");
 
+                    b.Property<int?>("Student_ID1")
+                        .HasColumnType("int");
+
                     b.HasKey("Student_ID", "Course_ID");
 
                     b.HasIndex("Course_ID");
+
+                    b.HasIndex("Student_ID1");
 
                     b.ToTable("Student_Courses");
                 });
@@ -618,9 +616,14 @@ namespace Online_Course_API.Migrations
                         .HasColumnType("int")
                         .HasColumnOrder(1);
 
+                    b.Property<int?>("Student_ID1")
+                        .HasColumnType("int");
+
                     b.HasKey("Student_ID", "Group_ID");
 
                     b.HasIndex("Group_ID");
+
+                    b.HasIndex("Student_ID1");
 
                     b.ToTable("Student_Groups");
                 });
@@ -639,9 +642,14 @@ namespace Online_Course_API.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int?>("Student_ID1")
+                        .HasColumnType("int");
+
                     b.HasKey("Student_ID", "Question_ID");
 
                     b.HasIndex("Question_ID");
+
+                    b.HasIndex("Student_ID1");
 
                     b.ToTable("Student_Questions");
                 });
@@ -659,9 +667,14 @@ namespace Online_Course_API.Migrations
                     b.Property<float>("Grade")
                         .HasColumnType("real");
 
+                    b.Property<int?>("Student_ID1")
+                        .HasColumnType("int");
+
                     b.HasKey("Student_ID", "Quiz_ID");
 
                     b.HasIndex("Quiz_ID");
+
+                    b.HasIndex("Student_ID1");
 
                     b.ToTable("Student_Quizzes");
                 });
@@ -684,9 +697,14 @@ namespace Online_Course_API.Migrations
                     b.Property<float>("Rate")
                         .HasColumnType("real");
 
+                    b.Property<int?>("Student_ID1")
+                        .HasColumnType("int");
+
                     b.HasKey("Student_ID", "Session_ID");
 
                     b.HasIndex("Session_ID");
+
+                    b.HasIndex("Student_ID1");
 
                     b.ToTable("Student_Sessions");
                 });
@@ -783,6 +801,15 @@ namespace Online_Course_API.Migrations
                     b.Navigation("Instructor");
                 });
 
+            modelBuilder.Entity("Online_Course_API.Model.Instructor", b =>
+                {
+                    b.HasOne("Online_Course_API.Model.ApplicationUser", null)
+                        .WithOne()
+                        .HasForeignKey("Online_Course_API.Model.Instructor", "UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
             modelBuilder.Entity("Online_Course_API.Model.Instructor_Course", b =>
                 {
                     b.HasOne("Online_Course_API.Model.Course", "Course")
@@ -852,7 +879,11 @@ namespace Online_Course_API.Migrations
                 {
                     b.HasOne("Online_Course_API.Model.Parent", "Parent")
                         .WithMany("Students")
-                        .HasForeignKey("Parent_ID")
+                        .HasForeignKey("Parent_ID");
+
+                    b.HasOne("Online_Course_API.Model.ApplicationUser", null)
+                        .WithOne()
+                        .HasForeignKey("Online_Course_API.Model.Student", "UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -868,10 +899,14 @@ namespace Online_Course_API.Migrations
                         .IsRequired();
 
                     b.HasOne("Online_Course_API.Model.Student", "Student")
-                        .WithMany("StudentCourses")
+                        .WithMany()
                         .HasForeignKey("Student_ID")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
+
+                    b.HasOne("Online_Course_API.Model.Student", null)
+                        .WithMany("StudentCourses")
+                        .HasForeignKey("Student_ID1");
 
                     b.Navigation("Course");
 
@@ -887,10 +922,14 @@ namespace Online_Course_API.Migrations
                         .IsRequired();
 
                     b.HasOne("Online_Course_API.Model.Student", "Student")
-                        .WithMany("StudentGroups")
+                        .WithMany()
                         .HasForeignKey("Student_ID")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
+
+                    b.HasOne("Online_Course_API.Model.Student", null)
+                        .WithMany("StudentGroups")
+                        .HasForeignKey("Student_ID1");
 
                     b.Navigation("Group");
 
@@ -906,10 +945,14 @@ namespace Online_Course_API.Migrations
                         .IsRequired();
 
                     b.HasOne("Online_Course_API.Model.Student", "Student")
-                        .WithMany("StudentQuestions")
+                        .WithMany()
                         .HasForeignKey("Student_ID")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
+
+                    b.HasOne("Online_Course_API.Model.Student", null)
+                        .WithMany("StudentQuestions")
+                        .HasForeignKey("Student_ID1");
 
                     b.Navigation("Question");
 
@@ -925,10 +968,14 @@ namespace Online_Course_API.Migrations
                         .IsRequired();
 
                     b.HasOne("Online_Course_API.Model.Student", "Student")
-                        .WithMany("StudentQuizzes")
+                        .WithMany()
                         .HasForeignKey("Student_ID")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
+
+                    b.HasOne("Online_Course_API.Model.Student", null)
+                        .WithMany("StudentQuizzes")
+                        .HasForeignKey("Student_ID1");
 
                     b.Navigation("Quiz");
 
@@ -944,10 +991,14 @@ namespace Online_Course_API.Migrations
                         .IsRequired();
 
                     b.HasOne("Online_Course_API.Model.Student", "Student")
-                        .WithMany("StudentSessions")
+                        .WithMany()
                         .HasForeignKey("Student_ID")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
+
+                    b.HasOne("Online_Course_API.Model.Student", null)
+                        .WithMany("StudentSessions")
+                        .HasForeignKey("Student_ID1");
 
                     b.Navigation("Session");
 

@@ -41,7 +41,7 @@ namespace Online_Course_API
                 options.AddPolicy("InstructorPolicy", policy =>
                     policy.RequireRole("Instructor"));
                 options.AddPolicy("StudentPolicy", policy => policy.RequireRole("Student"));
-                options.AddPolicy("ParentPolicy", policy => policy.RequireRole("Parent"));
+                
             });
 
 

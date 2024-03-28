@@ -65,14 +65,78 @@ namespace Online_Course_API.Model
                 .HasForeignKey(q => q.Group_ID)
                 .OnDelete(DeleteBehavior.ClientSetNull);
 
+            modelBuilder.Entity<Student_Group>()
+        .HasOne(sg => sg.Student)
+        .WithMany()
+        .HasForeignKey(sg => sg.Student_ID)
+        .OnDelete(DeleteBehavior.Restrict);
 
+
+            modelBuilder.Entity<Student_Quiz>()
+       .HasOne(sq => sq.Student)
+       .WithMany()
+       .HasForeignKey(sq => sq.Student_ID)
+       .OnDelete(DeleteBehavior.Restrict);
+
+            modelBuilder.Entity<Student_Session>()
+        .HasOne(ss => ss.Student)
+        .WithMany()
+        .HasForeignKey(ss => ss.Student_ID)
+        .OnDelete(DeleteBehavior.Restrict);
+
+
+            modelBuilder.Entity<Student_Question>()
+        .HasOne(sq => sq.Student)
+        .WithMany()
+        .HasForeignKey(sq => sq.Student_ID)
+        .OnDelete(DeleteBehavior.Restrict);
+
+            modelBuilder.Entity<Instructor>()
+           .HasKey(i => i.Instructor_ID);
+
+            modelBuilder.Entity<Instructor>()
+                .HasOne<ApplicationUser>()
+                .WithOne()
+                .HasForeignKey<Instructor>(i => i.UserId)
+                .IsRequired();
+
+            modelBuilder.Entity<Student>()
+                .HasKey(s => s.Student_ID);
+
+            modelBuilder.Entity<Student>()
+                .HasOne<ApplicationUser>()
+                .WithOne()
+                .HasForeignKey<Student>(s => s.UserId)
+                .IsRequired();
+
+            modelBuilder.Entity<Student_Question>()
+        .HasOne(sq => sq.Student)
+        .WithMany()
+        .HasForeignKey(sq => sq.Student_ID)
+        .OnDelete(DeleteBehavior.Restrict);
+
+            modelBuilder.Entity<Student_Course>()
+       .HasOne(sc => sc.Student)
+       .WithMany()
+       .HasForeignKey(sc => sc.Student_ID)
+       .OnDelete(DeleteBehavior.Restrict);
 
             base.OnModelCreating(modelBuilder);
-    
 
 
 
-           
+            //modelBuilder.Entity<Instructor>()
+            //    .HasOne(i => i.ApplicationUser)
+            //    .WithMany()
+            //    .HasForeignKey(i => i.UserId)
+            //    .OnDelete(DeleteBehavior.Restrict);
+
+            //modelBuilder.Entity<Student>()
+            //    .HasOne(s => s.ApplicationUser)
+            //    .WithMany()
+            //    .HasForeignKey(s => s.UserId)
+            //    .OnDelete(DeleteBehavior.Restrict);
+
 
 
 
@@ -97,6 +161,10 @@ namespace Online_Course_API.Model
             modelBuilder.Entity<Student_Session>()
                 .HasKey(m => new { m.Student_ID, m.Session_ID });
 
+
+
+
+            
         }
     }
 }
