@@ -20,7 +20,8 @@ namespace Online_Course_API.Controllers
             context = _context;
             mapper = _mapper;
         }
-        [Authorize(Roles = "Student")]
+        
+        //[Authorize(Roles = "Student")]
         [HttpGet]
         public IActionResult GetAll()
         {

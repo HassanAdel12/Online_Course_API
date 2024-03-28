@@ -10,7 +10,7 @@ namespace Online_Course_API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    [Authorize]
+    //[Authorize]
     public class StudentController : ControllerBase
     {
         private readonly OnlineCourseDBContext _context;
@@ -78,8 +78,7 @@ namespace Online_Course_API.Controllers
             }
         }
 
-<<<<<<< HEAD
-        [Authorize(Roles = "Instructor")]
+        //[Authorize(Roles = "Instructor")]
 
         [HttpPost]
         public IActionResult PostStudent(StudentDTO studentDTO)

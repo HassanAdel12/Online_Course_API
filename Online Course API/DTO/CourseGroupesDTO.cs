@@ -18,6 +18,14 @@ namespace Online_Course_API.DTO
 
         public string  courseName { get; set; }
 
+        public int Num_Students { get; set; }
+
+        public DateOnly Creation_Date { get; set; }
+
+        public DateOnly End_Date { get; set; }
+
+        public float Price { get; set; }
+
 
     }
 }

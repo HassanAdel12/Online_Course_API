@@ -21,7 +21,7 @@ namespace Online_Course_API.Controllers
             _mapper = mapper;
         }
 
-        [Authorize(Roles = "Student")]
+        //[Authorize(Roles = "Student")]
         [HttpGet]
         public ActionResult<IEnumerable<SessionDTO>> GetSessions()
         {

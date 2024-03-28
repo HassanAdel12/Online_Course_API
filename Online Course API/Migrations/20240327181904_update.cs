@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace Online_Course_API.Migrations
 {
     /// <inheritdoc />
-    public partial class u : Migration
+    public partial class update : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -74,12 +74,7 @@ namespace Online_Course_API.Migrations
                     Phone = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Email = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Password = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Gender = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    BirthDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    AboutMe = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: false),
-                    Address = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
-                    Country = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
-                    City = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false)
+                    Gender = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -373,6 +368,8 @@ namespace Online_Course_API.Migrations
                     Start_Date = table.Column<DateTime>(type: "datetime2", nullable: false),
                     End_at = table.Column<DateTime>(type: "datetime2", nullable: false),
                     Rate = table.Column<float>(type: "real", nullable: false),
+                    OnlineVideo = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Zoom = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Instructor_ID = table.Column<int>(type: "int", nullable: true),
                     Group_ID = table.Column<int>(type: "int", nullable: false)
                 },

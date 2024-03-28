@@ -32,7 +32,7 @@ namespace Online_Course_API.Controllers
         //    return Ok(questionsDTO);
         //}
 
-        [HttpGet("AllQuestions/{quizId}")]
+        [HttpGet("Question/{quizId}")]
         public ActionResult<IEnumerable<AllQuestionsinExamDTO>> GetGroupsByCourse(int quizId)
         {
             var groups = _context.Questions

@@ -9,10 +9,10 @@ namespace Online_Course_API.DTO
         public int Question_ID { get; set; }
         public string Question_Text { get; set; }
 
-        [ForeignKey("Quiz")]
         public int Quiz_ID { get; set; }
 
-        public List <String> ChoisesText { get; set; }
+
+        public virtual ICollection<ChoiseDTO> Choises { get; set; }
 
     }
 }

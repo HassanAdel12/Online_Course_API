@@ -12,8 +12,8 @@ using Online_Course_API.Model;
 namespace Online_Course_API.Migrations
 {
     [DbContext(typeof(OnlineCourseDBContext))]
-    [Migration("20240327092438_u")]
-    partial class u
+    [Migration("20240327181904_update")]
+    partial class update
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -346,29 +346,6 @@ namespace Online_Course_API.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Instructor_ID"));
 
-                    b.Property<string>("AboutMe")
-                        .IsRequired()
-                        .HasMaxLength(200)
-                        .HasColumnType("nvarchar(200)");
-
-                    b.Property<string>("Address")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
-
-                    b.Property<DateTime>("BirthDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("City")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
-
-                    b.Property<string>("Country")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
-
                     b.Property<string>("Email")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -524,6 +501,10 @@ namespace Online_Course_API.Migrations
                     b.Property<int?>("Instructor_ID")
                         .HasColumnType("int");
 
+                    b.Property<string>("OnlineVideo")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<float>("Rate")
                         .HasColumnType("real");
 
@@ -534,6 +515,10 @@ namespace Online_Course_API.Migrations
 
                     b.Property<DateTime>("Start_Date")
                         .HasColumnType("datetime2");
+
+                    b.Property<string>("Zoom")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Session_ID");
 

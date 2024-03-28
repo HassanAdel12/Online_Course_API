@@ -33,9 +33,9 @@ namespace Online_Course_API.Mapper
 
             CreateMap<Session, ALlSessionDTO>().ReverseMap();
 
-            CreateMap<Question, AllQuestionsinExamDTO>()
-            .ForMember(dest => dest.ChoisesText,
-                       opt => opt.MapFrom(src => src.Choises.Select(c => c.Text)));
+            CreateMap<Question, AllQuestionsinExamDTO>().ReverseMap();
+            //.ForMember(dest => dest.ChoisesText,
+            // opt => opt.MapFrom(src => src.Choises.Select(c => c.Text)));
 
 
 

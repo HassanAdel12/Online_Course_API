@@ -20,7 +20,7 @@ namespace Online_Course_API.Controllers
             _mapper = mapper;
         }
 
-        [HttpGet("ByGroup/{groupId}")]
+        [HttpGet("Group/{groupId}")]
         public ActionResult<IEnumerable<AllExamByGroupDTO>> GetExamsByGroup(int groupId)
         {
             var exams = _context.Quizzes

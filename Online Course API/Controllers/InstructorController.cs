@@ -63,7 +63,7 @@ namespace Online_Course_API.Controllers
             
         }
 
-        [Authorize(Roles = "Instructor")]
+        //[Authorize(Roles = "Instructor")]
         [HttpPost]
         public IActionResult PostInstructor(InstructorDTO instructorDTO)
         {
@@ -88,7 +88,7 @@ namespace Online_Course_API.Controllers
             }
             
         }
-        [Authorize(Roles = "Instructor")]
+        //[Authorize(Roles = "Instructor")]
         [HttpPut("{id}")]
         public IActionResult PutInstructor(int id, InstructorDTO instructorDTO)
         {

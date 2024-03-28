@@ -21,7 +21,7 @@ namespace Online_Course_API.Controllers
             _mapper = mapper;
         }
 
-        [HttpGet("Bycourse/{courseId}")]
+        [HttpGet("Course/{courseId}")]
         public ActionResult<IEnumerable<CourseGroupesDTO>> GetGroupsByCourse(int courseId)
         {
             var groups = _context.Groups
@@ -31,7 +31,7 @@ namespace Online_Course_API.Controllers
             return Ok(courseGroupesDTO);
         }
 
-        [HttpGet("Byinstructor/{instructorId}")]
+        [HttpGet("Instructor/{instructorId}")]
         public ActionResult<IEnumerable<CourseGroupesDTO>> GetGroupsByInstructor(int instructorId)
         {
             var groups = _context.Groups
