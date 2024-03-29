@@ -6,15 +6,11 @@ namespace Online_Course_API.DTO
 {
     public class Student_SessionDTO
     {
-        [Key]
-        [Column(Order = 0)]
-        [ForeignKey("Student")]
+        [Required(ErrorMessage = "Student ID is required")]
         public int Student_ID { get; set; }
 
 
-        [Key]
-        [Column(Order = 1)]
-        [ForeignKey("Session")]
+        
         [Required(ErrorMessage = "Session ID is required")]
         public int Session_ID { get; set; }
 

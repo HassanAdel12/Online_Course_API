@@ -5,7 +5,7 @@ namespace Online_Course_API.DTO
 {
     public class SessionDTO
     {
-        [Key]
+        
         public int Session_ID { get; set; }
 
         [Required(ErrorMessage = "Session name is required")]
@@ -23,6 +23,10 @@ namespace Online_Course_API.DTO
         [Required(ErrorMessage = "Rate is required")]
         [Range(0, 5, ErrorMessage = "Rate must be positive number")]
         public float Rate { get; set; }
+
+        public String OnlineVideo { get; set; }
+
+        public String Zoom { get; set; }
 
         public int Instructor_ID { get; set; }
 

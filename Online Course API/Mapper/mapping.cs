@@ -19,14 +19,13 @@ namespace Online_Course_API.Mapper
             CreateMap<StudentDTO, Student>()
                 .ForMember(dest => dest.Parent, opt => opt.Ignore()); // Ignore mapping for Parent, as it's not in StudentDTO
             CreateMap<Session, SessionDTO>().ReverseMap();
-            CreateMap<StudentCourseDTO, Student_Course>().ReverseMap();
 
 
             CreateMap<StudentQuizDTO, Student_Quiz>().ReverseMap();
 
            
             CreateMap<Group, CourseGroupesDTO>()
-                .ForMember(dest => dest.InstructorName, opt => opt.MapFrom(src => src.Instructor.First_Name))
+                .ForMember(dest => dest.InstructorUserName, opt => opt.MapFrom(src => src.Instructor.ApplicationUser.UserName))
                 .ForMember(dest => dest.courseName, opt => opt.MapFrom(src => src.Course.Name));
 
             CreateMap<Quiz, AllExamByGroupDTO>().ReverseMap();

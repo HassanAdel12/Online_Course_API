@@ -5,7 +5,6 @@ namespace Online_Course_API.DTO
 {
     public class GroupDTO
     {
-        [Key]
         public int Group_ID { get; set; }
 
         [Required(ErrorMessage = "Group name is required")]

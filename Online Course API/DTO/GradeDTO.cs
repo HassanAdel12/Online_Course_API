@@ -4,7 +4,6 @@ namespace Online_Course_API.DTO
 {
     public class GradeDTO
     {
-        [Key]
         public int Grade_ID { get; set; }
 
         [Required(ErrorMessage = "Grade name is required")]

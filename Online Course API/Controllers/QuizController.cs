@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Online_Course_API.Data;
 using Online_Course_API.DTO;
 using Online_Course_API.Model;
 
@@ -22,6 +23,7 @@ namespace Online_Course_API.Controllers
             context = _context;
             mapper = _mapper;
         }
+        
         //[Authorize(Roles = "Instructor")]
         [HttpGet]
         public IActionResult GetAll()

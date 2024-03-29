@@ -6,7 +6,6 @@ namespace Online_Course_API.DTO
     public class ChoiseDTO
     {
 
-        [Key]
         public int Choise_ID { get; set; }
 
 

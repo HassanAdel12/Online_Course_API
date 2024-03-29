@@ -19,5 +19,7 @@ namespace Online_Course_API.Model
         public int Group_ID { get; set; }
 
         public virtual Group Group { get; set; }
+
+        public DateTime Enroll_Date { get; set; }
     }
 }

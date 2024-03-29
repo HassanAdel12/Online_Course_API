@@ -32,7 +32,6 @@ namespace Online_Course_API.Model
 
         public virtual ICollection<Instructor_Course> Instructor_Courses { get; set; }
 
-        public virtual ICollection<Student_Course> StudentCourses { get; set; }
 
     }
 }

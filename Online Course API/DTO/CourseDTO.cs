@@ -5,7 +5,6 @@ namespace Online_Course_API.DTO
 {
     public class CourseDTO
     {
-        [Key]
         public int Course_ID { get; set; }
 
         [Required(ErrorMessage = "Course name is required")]

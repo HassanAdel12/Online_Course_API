@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Online_Course_API.Data;
 using Online_Course_API.DTO;
 using Online_Course_API.Model;
 
@@ -78,9 +79,9 @@ namespace Online_Course_API.Controllers
             }
         }
 
-<<<<<<< HEAD
-        [Authorize(Roles = "Instructor")]
 
+
+        //[Authorize(Roles = "Instructor")]
         [HttpPost]
         public IActionResult PostStudent(StudentDTO studentDTO)
         {

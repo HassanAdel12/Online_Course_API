@@ -2,8 +2,8 @@
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Online_Course_API.Data;
 using Online_Course_API.DTO;
-using Online_Course_API.Model;
 
 namespace Online_Course_API.Controllers
 {
@@ -22,14 +22,23 @@ namespace Online_Course_API.Controllers
 
      
 
+        
         [HttpGet("AllQuestions/{quizId}")]
-        public ActionResult<IEnumerable<AllQuestionsinExamDTO>> GetGroupsByCourse(int quizId)
+        public ActionResult<IEnumerable<AllQuestionsinExamDTO>> GetQuestionByExam(int quizId)
         {
-            var questions = _context.Questions
+            try
+            {
+                var questions = _context.Questions
                 .Where(g => g.Quiz_ID == quizId).Include(g => g.Choises).ToList();
 
-            var questionsDTO = _mapper.Map<List<AllQuestionsinExamDTO>>(questions);
-            return Ok(questionsDTO);
+                var questionsDTO = _mapper.Map<List<AllQuestionsinExamDTO>>(questions);
+                return Ok(questionsDTO);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex);
+            }
+            
         }
 
     }

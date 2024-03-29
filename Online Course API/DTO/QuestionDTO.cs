@@ -5,7 +5,6 @@ namespace Online_Course_API.DTO
 {
     public class QuestionDTO
     {
-        [Key]
         public int Question_ID { get; set; }
 
         [Required(ErrorMessage = "Question text is required")]

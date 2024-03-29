@@ -6,7 +6,6 @@ namespace Online_Course_API.DTO
 {
     public class QuizDTO
     {
-        [Key]
         public int Quiz_ID { get; set; }
 
         [Required(ErrorMessage = "Quiz name is required")]
