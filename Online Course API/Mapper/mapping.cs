@@ -11,9 +11,9 @@ namespace Online_Course_API.Mapper
 
             CreateMap<Instructor, InstructorDTO>().ReverseMap();
             CreateMap<Student, StudentDTO>().ReverseMap();
-             //.ForMember(dest => dest.Parent_Email, opt => opt.MapFrom(src => src.Parent.Email))
-             //.ForMember(dest => dest.Parent_FirstName, opt => opt.MapFrom(src => src.Parent.First_Name))
-             //.ForMember(dest => dest.Parent_LastName, opt => opt.MapFrom(src => src.Parent.Last_Name));
+            //.ForMember(dest => dest.Parent_Email, opt => opt.MapFrom(src => src.Parent.Email))
+            //.ForMember(dest => dest.Parent_FirstName, opt => opt.MapFrom(src => src.Parent.First_Name))
+            //.ForMember(dest => dest.Parent_LastName, opt => opt.MapFrom(src => src.Parent.Last_Name));
 
 
             CreateMap<StudentDTO, Student>()
@@ -23,9 +23,9 @@ namespace Online_Course_API.Mapper
 
             CreateMap<StudentQuizDTO, Student_Quiz>().ReverseMap();
 
-           
+
             CreateMap<Group, CourseGroupesDTO>()
-                .ForMember(dest => dest.InstructorUserName, opt => opt.MapFrom(src => src.Instructor.ApplicationUser.UserName))
+                .ForMember(dest => dest.InstructorName, opt => opt.MapFrom(src => src.Instructor.ApplicationUser.Name))
                 .ForMember(dest => dest.courseName, opt => opt.MapFrom(src => src.Course.Name));
 
             CreateMap<Quiz, AllExamByGroupDTO>().ReverseMap();

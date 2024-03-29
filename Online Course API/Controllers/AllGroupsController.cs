@@ -39,7 +39,7 @@ namespace Online_Course_API.Controllers
             {
                 return BadRequest(ex);
             }
-           
+
         }
 
         [HttpGet("Instructor/{instructorId}")]
@@ -59,10 +59,10 @@ namespace Online_Course_API.Controllers
             {
                 return BadRequest(ex);
             }
-            
+
         }
 
-        [HttpGet("BycourseName/{courseName}")]
+        [HttpGet("courseName/{courseName}")]
         public ActionResult<IEnumerable<CourseGroupesDTO>> GetGroupsByCourseName(string courseName)
         {
             try
@@ -78,7 +78,28 @@ namespace Online_Course_API.Controllers
             {
                 return BadRequest(ex);
             }
-            
+
         }
+
+
+        //[HttpGet("Student/{StudentId}")]
+        //public ActionResult<IEnumerable<CourseGroupesDTO>> GetGroupsByStudent(int StudentId)
+        //{
+        //    try
+        //    {
+        //        var groups = _context.Groups
+        //        .Where(g => g.StudentGroups == instructorId).
+        //        Include(g => g.Instructor).Include(g => g.Course).ToList();
+
+        //        var courseGroupesDTO = _mapper.Map<List<CourseGroupesDTO>>(groups);
+        //        return Ok(courseGroupesDTO);
+
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        return BadRequest(ex);
+        //    }
+
+        //}
     }
 }

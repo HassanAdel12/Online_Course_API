@@ -9,6 +9,7 @@ using Online_Course_API.Model;
 using System.Security.Cryptography;
 using System.Security.Principal;
 using System.Text;
+using System.Text.Json.Serialization;
 
 namespace Online_Course_API
 {
@@ -44,7 +45,7 @@ namespace Online_Course_API
             {
                 options.AddPolicy("InstructorPolicy", policy =>
                     policy.RequireRole(UserRoles.Instructor));
-                options.AddPolicy("StudentPolicy", policy => 
+                options.AddPolicy("StudentPolicy", policy =>
                     policy.RequireRole(UserRoles.Student));
 
             });
@@ -85,6 +86,10 @@ namespace Online_Course_API
 
 
             builder.Services.AddAutoMapper(typeof(Program));
+
+
+            //builder.Services.Configure<Microsoft.AspNetCore.Http.Json.JsonOptions>(options
+            //    => options.SerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles);
 
             var app = builder.Build();
 

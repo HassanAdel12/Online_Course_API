@@ -35,7 +35,7 @@ namespace Online_Course_API.Controllers
             {
                 return BadRequest(ex);
             }
-            
+
         }
 
         //[Authorize(Roles = "Student")]
@@ -58,7 +58,7 @@ namespace Online_Course_API.Controllers
                 {
                     return BadRequest(ex);
                 }
-                
+
             }
         }
 
@@ -82,6 +82,7 @@ namespace Online_Course_API.Controllers
                             Course_ID = groupDto.Course_ID
                         });
                     }
+
                     int durationMonth = context.Courses.Find(groupDto.Course_ID).Duration;
                     groupDto.End_Date = groupDto.Creation_Date.AddMonths(durationMonth);
                     context.Groups.Add(mapper.Map<Group>(groupDto));
@@ -95,7 +96,7 @@ namespace Online_Course_API.Controllers
                 {
                     return BadRequest(ex);
                 }
-                
+
             }
             else
             {
@@ -103,7 +104,7 @@ namespace Online_Course_API.Controllers
             }
         }
 
-       
+
         //[Authorize(Roles = "Instructor")]
         [HttpPut("{ID:int}")]
         public IActionResult Update(GroupDTO groupDto, int ID)
@@ -128,7 +129,7 @@ namespace Online_Course_API.Controllers
                     {
                         return BadRequest(ex);
                     }
-                    
+
                 }
                 else
                 {
@@ -142,7 +143,7 @@ namespace Online_Course_API.Controllers
             }
         }
 
-       
+
         //[Authorize(Roles = "Instructor")]
         [HttpDelete("{ID:int}")]
         public IActionResult Delete(int ID)
@@ -162,7 +163,7 @@ namespace Online_Course_API.Controllers
                 {
                     return BadRequest(ex);
                 }
-                
+
             }
             else
             {

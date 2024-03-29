@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -18,23 +19,29 @@ namespace Online_Course_API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    
+
     public class AccountController : ControllerBase
     {
-        
+
         private readonly UserManager<ApplicationUser> usermanger;
         private readonly RoleManager<IdentityRole> roleManager;
         private readonly IConfiguration config;
         private readonly OnlineCourseDBContext _Context;
+        private readonly IMapper _mapper;
 
-        public AccountController(UserManager<ApplicationUser> usermanger, RoleManager<IdentityRole> roleManager, IConfiguration config, OnlineCourseDBContext _Context)
+        public AccountController(UserManager<ApplicationUser> usermanger,
+            RoleManager<IdentityRole> roleManager,
+            IConfiguration config,
+            OnlineCourseDBContext _Context,
+            IMapper _mapper)
         {
             this.usermanger = usermanger;
             this.config = config;
             this.roleManager = roleManager;
             this._Context = _Context;
+            this._mapper = _mapper;
         }
-       
+
         [HttpPost("register")]
         public async Task<IActionResult> Registration(RegisterUserDto userDto)
         {
@@ -110,6 +117,7 @@ namespace Online_Course_API.Controllers
                     ApplicationUser user = new ApplicationUser();
                     user.UserName = userDto.UserName;
                     user.Email = userDto.Email;
+                    user.Name = userDto.Name;
 
                     IdentityResult result = await usermanger.CreateAsync(user, userDto.Password);
 
@@ -117,11 +125,12 @@ namespace Online_Course_API.Controllers
                     {
                         if (!string.IsNullOrEmpty(userDto.Role))
                         {
-                            
 
+                            _Context.SaveChanges();
                             // Add user details to corresponding tables based on role
                             switch (userDto.Role)
                             {
+
                                 case "INSTRUCTOR":
                                 case "instructor":
                                 case "Instructor":
@@ -133,15 +142,27 @@ namespace Online_Course_API.Controllers
 
                                     await usermanger.AddToRoleAsync(user, UserRoles.Instructor);
 
-                                    // Add user details to Instructor table
-                                    _Context.Instructors.Add(new Instructor
+                                    InstructorDTO instructorDTO = new InstructorDTO()
                                     {
                                         UserId = user.Id,
-                                        //ApplicationUser = user
-                                        //First_Name = user.UserName,
-                                        //Email = user.Email,
-                                        //Password = userDto.Password // Store password in plain text (not recommended)
-                                    });
+                                        ApplicationUser = user
+
+                                    };
+
+                                    Instructor instructor = _mapper.Map<Instructor>(instructorDTO);
+
+                                    _Context.Instructors.Add(instructor);
+                                    _Context.SaveChanges();
+
+                                    // Add user details to Instructor table
+                                    //_Context.Instructors.Add(new Instructor
+                                    //{
+                                    //    UserId = user.Id,
+                                    //    ApplicationUser = user
+                                    //    //First_Name = user.UserName,
+                                    //    //Email = user.Email,
+                                    //    //Password = userDto.Password // Store password in plain text (not recommended)
+                                    //});
 
                                     break;
 
@@ -156,21 +177,35 @@ namespace Online_Course_API.Controllers
 
                                     await usermanger.AddToRoleAsync(user, UserRoles.Student);
 
-                                    // Add user details to Student table
-                                    _Context.Students.Add(new Student
+                                    StudentDTO studentDTO = new StudentDTO()
                                     {
                                         UserId = user.Id,
-                                        //ApplicationUser = user
-                                        //First_Name = user.UserName,
-                                        //Email = user.Email,
-                                        //Password = userDto.Password // Store password in plain text (not recommended)
-                                    });
+                                        ApplicationUser = user
+
+                                    };
+
+                                    Student student = _mapper.Map<Student>(studentDTO);
+
+                                    _Context.Students.Add(student);
+                                    _Context.SaveChanges();
+
+                                    // Add user details to Student table
+                                    //_Context.Students.Add(new Student
+                                    //{
+                                    //    UserId = user.Id,
+                                    //    ApplicationUser = user
+                                    //    //First_Name = user.UserName,
+                                    //    //Email = user.Email,
+                                    //    //Password = userDto.Password // Store password in plain text (not recommended)
+                                    //});
                                     break;
+
+
                                 default:
                                     // Invalid role
                                     return BadRequest("Invalid role.");
                             }
-                            await _Context.SaveChangesAsync();
+                            //await _Context.SaveChangesAsync();
 
                             return Ok();
                         }
@@ -200,31 +235,31 @@ namespace Online_Course_API.Controllers
 
 
         //[HttpPost("login")]
-        
+
         //public async Task<IActionResult> Login(LoginUserDto userDto)
         //{
         //    if (ModelState.IsValid == true)
         //    {
-                
+
         //        ApplicationUser user = await usermanger.FindByNameAsync(userDto.UserName);
         //        if (user != null)
         //        {
         //            bool found = await usermanger.CheckPasswordAsync(user, userDto.Password);
         //            if (found)
         //            {
-                     
+
         //                var claims = new List<Claim>();
 
         //                claims.Add(new Claim(ClaimTypes.Role, "Instructor"));
         //                claims.Add(new Claim(ClaimTypes.Role, "Student"));
-                      
+
 
 
         //                claims.Add(new Claim(ClaimTypes.Name, user.UserName));
         //                claims.Add(new Claim(ClaimTypes.NameIdentifier, user.Id));
         //                claims.Add(new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()));
-          
-                        
+
+
         //                var roles = await usermanger.GetRolesAsync(user);
         //                foreach (var itemRole in roles)
         //                {
@@ -237,14 +272,14 @@ namespace Online_Course_API.Controllers
         //                        case "Student":
         //                            claims.Add(new Claim("Student", "true"));
         //                            break;
-                               
-                                   
+
+
         //                    }
         //                }
-                    
+
         //                var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(config["JWT:SecretKey"]));
         //                var sc = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
-                        
+
         //                JwtSecurityToken mytoken = new JwtSecurityToken(
         //                    issuer: config["JWT:ValidIssuer"],
         //                    audience: config["JWT:ValidAudiance"],
@@ -284,14 +319,14 @@ namespace Online_Course_API.Controllers
 
 
                 JwtSecurityToken jwtSecurityToken = await CreateJwtToken(user);
-                
+
                 var roles = await usermanger.GetRolesAsync(user);
 
                 return Ok(new
                 {
                     Token = new JwtSecurityTokenHandler().WriteToken(jwtSecurityToken),
                     ExpireOn = jwtSecurityToken.ValidTo,
-                    Roles = roles.ToList(),
+                    Roles = roles.FirstOrDefault(),
                     Email = user.Email,
                     UserName = user.UserName,
 
@@ -329,16 +364,16 @@ namespace Online_Course_API.Controllers
             }
 
 
-                var claims = new[]
-                {
+            var claims = new[]
+            {
                     new Claim(ClaimTypes.NameIdentifier, user.Id),
                     new Claim(ClaimTypes.Name, user.UserName),
                     new Claim(ClaimTypes.Email, user.Email),
                     new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString())
                 }
 
-                .Union(userClaims)
-                .Union(roleClaims);
+            .Union(userClaims)
+            .Union(roleClaims);
 
             SymmetricSecurityKey symmetricSecurityKey = new SymmetricSecurityKey
                 (Encoding.UTF8.GetBytes(config["JWT:SecretKey"]));
