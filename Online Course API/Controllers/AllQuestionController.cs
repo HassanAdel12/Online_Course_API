@@ -20,26 +20,16 @@ namespace Online_Course_API.Controllers
             _mapper = mapper;
         }
 
-        //[HttpGet("AllQuestions/{quizId}")]
-        //public IActionResult GetAllQuestionsInQuiz(int quizId)
-        //{
-        //    var questions = _context.Questions
-        //        .Where(q => q.Quiz_ID == quizId)
-        //        .ToList();
+     
 
-        //    var questionsDTO = _mapper.Map<List<AllQuestionsinExamDTO>>(questions);
-
-        //    return Ok(questionsDTO);
-        //}
-
-        [HttpGet("Question/{quizId}")]
+        [HttpGet("AllQuestions/{quizId}")]
         public ActionResult<IEnumerable<AllQuestionsinExamDTO>> GetGroupsByCourse(int quizId)
         {
-            var groups = _context.Questions
+            var questions = _context.Questions
                 .Where(g => g.Quiz_ID == quizId).Include(g => g.Choises).ToList();
 
-            var courseGroupesDTO = _mapper.Map<List<AllQuestionsinExamDTO>>(groups);
-            return Ok(courseGroupesDTO);
+            var questionsDTO = _mapper.Map<List<AllQuestionsinExamDTO>>(questions);
+            return Ok(questionsDTO);
         }
 
     }

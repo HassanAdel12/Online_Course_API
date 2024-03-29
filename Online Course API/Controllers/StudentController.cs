@@ -78,7 +78,8 @@ namespace Online_Course_API.Controllers
             }
         }
 
-        //[Authorize(Roles = "Instructor")]
+<<<<<<< HEAD
+        [Authorize(Roles = "Instructor")]
 
         [HttpPost]
         public IActionResult PostStudent(StudentDTO studentDTO)
