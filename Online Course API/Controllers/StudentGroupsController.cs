@@ -76,11 +76,22 @@ namespace Online_Course_API.Controllers
             return NoContent();
         }
 
+        ///
+        [HttpGet("hasnotThisGroup/{studentId}")]
+        public ActionResult<IEnumerable<GroupDTO>> GetGroupsexceptThisStudentID(int studentId)
+        {
+            var groups = _context.Groups
+                .Where(g => !_context.Student_Groups.Any(sg => sg.Group_ID == g.Group_ID && sg.Student_ID == studentId))
+                .ToList();
+
+            var groupDTOs = _mapper.Map<IEnumerable<GroupDTO>>(groups);
+
+            return Ok(groupDTOs);
+        }
 
 
 
-
-       
+        ///
         [HttpDelete("{studentId}/{groupId}")]
         public async Task<IActionResult> DeleteStudentGroup(int studentId, int groupId)
         {
