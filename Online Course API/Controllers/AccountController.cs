@@ -42,6 +42,50 @@ namespace Online_Course_API.Controllers
             this._mapper = _mapper;
         }
 
+
+        [HttpPost("GetID")]
+        public async Task<IActionResult> GetID(GetidDto getidDto)
+        {
+            try
+            {
+                ApplicationUser user = await usermanger.FindByNameAsync(getidDto.username);
+
+                if (user is null)
+                {
+                    return BadRequest("user name is not found !");
+                }
+
+                if (getidDto.role == "Student")
+                {
+
+                    Student student = _Context.Students.Where(s => s.UserId == user.Id).
+                        FirstOrDefault();
+                    return Ok(student.Student_ID);
+
+                }
+                else if (getidDto.role == "Instructor")
+                {
+
+                    Instructor instructor = _Context.Instructors.Where(i => i.UserId == user.Id).
+                        FirstOrDefault();
+                    return Ok(instructor.Instructor_ID);
+
+                }
+                else
+                {
+                    return BadRequest("role is not found !");
+                }
+
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+
+        }
+
+
+
         [HttpPost("register")]
         public async Task<IActionResult> Registration(RegisterUserDto userDto)
         {
@@ -225,7 +269,7 @@ namespace Online_Course_API.Controllers
                 }
                 catch (Exception ex)
                 {
-                    return BadRequest(ex);
+                    return BadRequest(ex.Message);
                 }
 
             }

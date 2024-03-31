@@ -22,6 +22,26 @@ namespace Online_Course_API.Controllers
             _mapper = mapper;
         }
 
+
+        [HttpGet("hasnotThisGroup/{courseId}/{studentId}")]
+        public ActionResult<IEnumerable<GroupDTO>> GetGroupsexceptThisStudentID(int courseId, int studentId)
+        {
+            var groups = _context.Groups
+                .Where(g => !_context.Student_Groups.Any
+                (sg => sg.Group_ID == g.Group_ID && sg.Student_ID == studentId)
+                && g.Course_ID == courseId).
+                Include(g => g.Instructor).
+               Include(g => g.Course).ToList();
+
+            //var groupDTOs = _mapper.Map<IEnumerable<GroupDTO>>(groups);
+            List<CourseGroupesDTO> courseGroupesDTO = _mapper.Map<List<CourseGroupesDTO>>(groups);
+
+
+            return Ok(courseGroupesDTO);
+        }
+
+
+
         [HttpGet("Course/{courseId}")]
         public ActionResult<IEnumerable<CourseGroupesDTO>> GetGroupsByCourse(int courseId)
         {
@@ -33,7 +53,8 @@ namespace Online_Course_API.Controllers
                Include(g => g.Course).ToList();
 
 
-                var courseGroupesDTO = _mapper.Map<List<CourseGroupesDTO>>(groups);
+                List<CourseGroupesDTO> courseGroupesDTO = _mapper.Map<List<CourseGroupesDTO>>(groups);
+
                 return Ok(courseGroupesDTO);
             }
             catch (Exception ex)
