@@ -21,7 +21,7 @@ namespace Online_Course_API.Controllers
             _mapper = mapper;
         }
 
-      
+
         [HttpGet]
         public ActionResult<IEnumerable<StudentQuizDTO>> GetStudentQuizzes()
         {
@@ -30,7 +30,7 @@ namespace Online_Course_API.Controllers
             return Ok(studentQuizDTOs);
         }
 
-     
+
         [HttpGet("{studentId}/{quizId}")]
         public ActionResult<StudentQuizDTO> GetStudentQuiz(int studentId, int quizId)
         {
@@ -63,10 +63,7 @@ namespace Online_Course_API.Controllers
         [HttpPut("{studentId}/{quizId}")]
         public IActionResult PutStudentQuiz(int studentId, int quizId, StudentQuizDTO studentQuizDTO)
         {
-            if (studentId != studentQuizDTO.Student_ID || quizId != studentQuizDTO.Quiz_ID)
-            {
-                return BadRequest();
-            }
+
 
             var studentQuiz = _context.Student_Quizzes.FirstOrDefault(sq => sq.Student_ID == studentId && sq.Quiz_ID == quizId);
             if (studentQuiz == null)
@@ -80,7 +77,7 @@ namespace Online_Course_API.Controllers
             return NoContent();
         }
 
-        
+
         [HttpDelete("{studentId}/{quizId}")]
         public IActionResult DeleteStudentQuiz(int studentId, int quizId)
         {

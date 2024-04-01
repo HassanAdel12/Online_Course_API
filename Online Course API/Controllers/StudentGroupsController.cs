@@ -14,7 +14,7 @@ namespace Online_Course_API.Controllers
     {
         private readonly OnlineCourseDBContext _context;
         private readonly IMapper _mapper;
-      
+
 
         public StudentGroupsController(OnlineCourseDBContext context, IMapper mapper)
         {
@@ -22,7 +22,7 @@ namespace Online_Course_API.Controllers
             _mapper = mapper;
         }
 
-       
+
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Student_GroupDTO>>> GetStudentGroups()
         {
@@ -43,7 +43,7 @@ namespace Online_Course_API.Controllers
             return _mapper.Map<Student_GroupDTO>(studentGroup);
         }
 
-      
+
         [HttpPost]
         public async Task<ActionResult<Student_GroupDTO>> PostStudentGroup(Student_GroupDTO studentGroupDTO)
         {
@@ -54,14 +54,11 @@ namespace Online_Course_API.Controllers
             return CreatedAtAction("GetStudentGroups", new { id = studentGroup.Student_ID }, studentGroupDTO);
         }
 
-  
+
         [HttpPut("{studentId}/{groupId}")]
         public async Task<IActionResult> PutStudentGroup(int studentId, int groupId, Student_GroupDTO studentGroupDTO)
         {
-            if (studentId != studentGroupDTO.Student_ID || groupId != studentGroupDTO.Group_ID)
-            {
-                return BadRequest();
-            }
+
 
             var existingStudentGroup = await _context.Student_Groups.FindAsync(studentId, groupId);
             if (existingStudentGroup == null)

@@ -36,10 +36,10 @@ namespace Online_Course_API.Controllers
             {
                 return BadRequest(ex);
             }
-            
+
         }
 
-    
+
         [HttpGet("{id}")]
         public ActionResult<SessionDTO> GetSession(int id)
         {
@@ -58,7 +58,7 @@ namespace Online_Course_API.Controllers
             {
                 return BadRequest(ex);
             }
-            
+
         }
 
         [HttpGet("Group/{Group_ID:int}")]
@@ -89,7 +89,7 @@ namespace Online_Course_API.Controllers
             try
             {
                 Group group = _context.Groups.Find(sessionDTO.Group_ID);
-                if (sessionDTO.Start_Date < group.End_Date.ToDateTime(new TimeOnly(0,0,0,0))
+                if (sessionDTO.Start_Date < group.End_Date.ToDateTime(new TimeOnly(0, 0, 0, 0))
                     && group.Instructor_ID == sessionDTO.Instructor_ID)
                 {
                     var session = _mapper.Map<Session>(sessionDTO);
@@ -103,48 +103,57 @@ namespace Online_Course_API.Controllers
                 {
                     return BadRequest("Not Can Add Session because date of session after end date for group or Instructor not create this group");
                 }
-                
+
             }
             catch (Exception ex)
             {
                 return BadRequest(ex);
             }
-            
+
         }
 
-     
+
         [HttpPut("{id}")]
         public IActionResult PutSession(int id, SessionDTO sessionDTO)
         {
-            if (id != sessionDTO.Session_ID)
+
+
+            if (ModelState.IsValid)
             {
-                return BadRequest();
+
+                Session oldSession = _context.Sessions.Find(id);
+                if (oldSession != null)
+                {
+                    try
+                    {
+                        sessionDTO.Session_ID = id;
+                        _mapper.Map(sessionDTO, oldSession);
+                        _context.Sessions.Update(oldSession);
+                        _context.SaveChanges();
+
+                        return Ok();
+                    }
+                    catch (Exception ex)
+                    {
+                        return BadRequest(ex);
+                    }
+
+                }
+                else
+                {
+                    return NotFound();
+                }
+
+            }
+            else
+            {
+                return BadRequest(ModelState);
             }
 
-            var session = _context.Sessions.Find(id);
 
-            if (session == null)
-            {
-                return NotFound();
-            }
-
-            try
-            {
-                _mapper.Map(sessionDTO, session);
-
-                _context.SaveChanges();
-
-                return NoContent();
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(ex);
-            }
-
-            
         }
 
-   
+
         [HttpDelete("{id}")]
         public IActionResult DeleteSession(int id)
         {
@@ -166,8 +175,8 @@ namespace Online_Course_API.Controllers
             {
                 return BadRequest(ex);
             }
-            
+
         }
-    
-}
+
+    }
 }

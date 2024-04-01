@@ -36,7 +36,7 @@ namespace Online_Course_API.Controllers
             {
                 return BadRequest(ex);
             }
-            
+
         }
 
         //[Authorize(Roles = "Instructor")]
@@ -61,7 +61,7 @@ namespace Online_Course_API.Controllers
             {
                 return BadRequest(ex);
             }
-            
+
         }
 
         //[Authorize(Roles = "Instructor")]
@@ -87,16 +87,13 @@ namespace Online_Course_API.Controllers
             {
                 return BadRequest(ex);
             }
-            
+
         }
         //[Authorize(Roles = "Instructor")]
         [HttpPut("{id}")]
         public IActionResult PutInstructor(int id, InstructorDTO instructorDTO)
         {
-            if (id != instructorDTO.Instructor_ID)
-            {
-                return BadRequest();
-            }
+
 
             var instructor = _context.Instructors.Find(id);
 
@@ -116,7 +113,7 @@ namespace Online_Course_API.Controllers
             {
                 return BadRequest(ex);
             }
-            
+
         }
 
         [HttpDelete("{id}")]
@@ -141,7 +138,7 @@ namespace Online_Course_API.Controllers
                 return BadRequest(ex);
             }
 
-            
+
         }
 
         //[HttpGet]
@@ -163,7 +160,7 @@ namespace Online_Course_API.Controllers
         //    return Ok(instructors);
         //}
 
-      
+
         //[HttpGet("{id}")]
         //public ActionResult<InstructorDTO> GetInstructor(int id)
         //{
@@ -189,7 +186,7 @@ namespace Online_Course_API.Controllers
         //    return Ok(instructor);
         //}
 
-       
+
         //[HttpPost]
         //public IActionResult PostInstructor(InstructorDTO instructorDTO)
         //{
@@ -214,7 +211,7 @@ namespace Online_Course_API.Controllers
         //    return CreatedAtAction(nameof(GetInstructor), new { id = instructor.Instructor_ID }, instructorDTO);
         //}
 
-       
+
         //[HttpPut("{id}")]
         //public IActionResult PutInstructor(int id, InstructorDTO instructorDTO)
         //{
@@ -243,7 +240,7 @@ namespace Online_Course_API.Controllers
         //    return NoContent();
         //}
 
-      
+
         //[HttpDelete("{id}")]
         //public IActionResult DeleteInstructor(int id)
         //{

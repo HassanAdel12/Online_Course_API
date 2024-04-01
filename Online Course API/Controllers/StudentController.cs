@@ -23,7 +23,7 @@ namespace Online_Course_API.Controllers
             _mapper = mapper;
         }
 
-   
+
         [HttpGet]
         public ActionResult<IEnumerable<StudentDTO>> GetStudents()
         {
@@ -37,10 +37,10 @@ namespace Online_Course_API.Controllers
             {
                 return BadRequest(ex);
             }
-            
+
         }
 
-      
+
         [HttpGet("{id}")]
         public ActionResult<StudentDTO> GetStudent(int id)
         {
@@ -59,7 +59,7 @@ namespace Online_Course_API.Controllers
             {
                 return BadRequest(ex);
             }
-            
+
         }
 
         [HttpGet("Group/{GroupID:int}")]
@@ -103,17 +103,14 @@ namespace Online_Course_API.Controllers
             {
                 return BadRequest(ex);
             }
-            
+
         }
 
-      
+
         [HttpPut("{id}")]
         public IActionResult PutStudent(int id, StudentDTO studentDTO)
         {
-            if (id != studentDTO.Student_ID)
-            {
-                return BadRequest();
-            }
+
 
             var student = _context.Students.Find(id);
 
@@ -135,10 +132,10 @@ namespace Online_Course_API.Controllers
             {
                 return BadRequest(ex);
             }
-            
+
         }
 
-       
+
         [HttpDelete("{id}")]
         public IActionResult DeleteStudent(int id)
         {
@@ -160,9 +157,9 @@ namespace Online_Course_API.Controllers
             {
                 return BadRequest(ex);
             }
-            
-        }
-    
 
-}
+        }
+
+
+    }
 }
