@@ -9,7 +9,7 @@ namespace Online_Course_API.DTO
         public int Quiz_ID { get; set; }
 
         [Required(ErrorMessage = "Quiz name is required")]
-        [StringLength(50, MinimumLength = 3, ErrorMessage = "Quiz name must be between 3 and 50 characters")]
+        [StringLength(50, MinimumLength = 2, ErrorMessage = "Quiz name must be between 3 and 50 characters")]
         public string Quiz_Name { get; set; }
 
         public int Instructor_ID { get; set; }

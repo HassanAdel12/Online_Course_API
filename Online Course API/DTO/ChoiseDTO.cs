@@ -10,7 +10,7 @@ namespace Online_Course_API.DTO
 
 
         [Required(ErrorMessage = "Text is required")]
-        [StringLength(100, MinimumLength = 3, ErrorMessage = "Text must be between 3 and 100 characters")]
+        [StringLength(100, MinimumLength = 1, ErrorMessage = "Text must be between 3 and 100 characters")]
         public string Text { get; set; }
 
 

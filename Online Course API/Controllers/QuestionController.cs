@@ -21,7 +21,7 @@ namespace Online_Course_API.Controllers
             context = _context;
             mapper = _mapper;
         }
-        
+
         //[Authorize(Roles = "Student")]
         [HttpGet]
         public IActionResult GetAll()
@@ -34,7 +34,7 @@ namespace Online_Course_API.Controllers
             {
                 return BadRequest(ex);
             }
-            
+
         }
 
 
@@ -56,7 +56,7 @@ namespace Online_Course_API.Controllers
                 {
                     return BadRequest(ex);
                 }
-                
+
             }
         }
 
@@ -72,15 +72,18 @@ namespace Online_Course_API.Controllers
                     context.Questions.Add(mapper.Map<Question>(questionDto));
                     context.SaveChanges();
 
-                    string URL = Url.Action(nameof(GetOneByID), new { ID = questionDto.Question_ID });
+                    //string URL = Url.Action(nameof(GetOneByID), new { ID = questionDto.Question_ID });
 
-                    return Created(URL, questionDto);
+                    int id = context.Questions.OrderByDescending(q => q.Question_ID)
+                        .FirstOrDefault().Question_ID;
+
+                    return Ok(id);
                 }
                 catch (Exception ex)
                 {
                     return BadRequest(ex);
                 }
-                
+
             }
             else
             {
@@ -112,7 +115,7 @@ namespace Online_Course_API.Controllers
                     {
                         return BadRequest(ex);
                     }
-                    
+
                 }
                 else
                 {
@@ -145,7 +148,7 @@ namespace Online_Course_API.Controllers
                 {
                     return BadRequest(ex);
                 }
-                
+
             }
             else
             {

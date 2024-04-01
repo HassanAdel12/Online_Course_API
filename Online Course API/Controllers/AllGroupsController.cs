@@ -23,14 +23,14 @@ namespace Online_Course_API.Controllers
         }
 
 
-        [HttpGet("hasnotThisGroup/{courseId}/{studentId}")]
+        [HttpGet("StudentGroups/{courseId}/{studentId}")]
         public ActionResult<IEnumerable<GroupDTO>> GetGroupsexceptThisStudentID(int courseId, int studentId)
         {
             var groups = _context.Groups
                 .Where(g => !_context.Student_Groups.Any
                 (sg => sg.Group_ID == g.Group_ID && sg.Student_ID == studentId)
                 && g.Course_ID == courseId).
-                Include(g => g.Instructor).
+                Include(g => g.Instructor).ThenInclude(g => g.ApplicationUser).
                Include(g => g.Course).ToList();
 
             //var groupDTOs = _mapper.Map<IEnumerable<GroupDTO>>(groups);
@@ -111,7 +111,9 @@ namespace Online_Course_API.Controllers
             {
                 IEnumerable<CourseGroupesDTO> groups = _context.Student_Groups
                 .Where(g => g.Student_ID == StudentId).
-                Include(g => g.Group.Course).Include(g => g.Group.Instructor).
+                Include(g => g.Group.Course).
+                Include(g => g.Group.Instructor).
+                ThenInclude(g => g.ApplicationUser).
                 Select(g => new CourseGroupesDTO
                 {
                     Group_ID = g.Group_ID,
@@ -119,7 +121,7 @@ namespace Online_Course_API.Controllers
                     Course_ID = g.Group.Course_ID,
                     courseName = g.Group.Course.Name,
                     Instructor_ID = g.Group.Instructor_ID,
-                    InstructorName = g.Group.Course.Name,
+                    InstructorName = g.Group.Instructor.ApplicationUser.Name,
                     Num_Students = g.Group.Num_Students,
                     Creation_Date = g.Group.Creation_Date,
                     End_Date = g.Group.End_Date,
