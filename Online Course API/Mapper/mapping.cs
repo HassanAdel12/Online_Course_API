@@ -28,7 +28,8 @@ namespace Online_Course_API.Mapper
                 .ForMember(dest => dest.InstructorName, opt => opt.MapFrom(src => src.Instructor.ApplicationUser.Name))
                 .ForMember(dest => dest.courseName, opt => opt.MapFrom(src => src.Course.Name));
 
-            CreateMap<Quiz, AllExamByGroupDTO>().ReverseMap();
+            CreateMap<Quiz, AllExamByGroupDTO>()
+                .ForMember(dest => dest.numQuestion, opt => opt.MapFrom(src => src.Questions.Count())).ReverseMap();
 
             CreateMap<Session, ALlSessionDTO>().ReverseMap();
 

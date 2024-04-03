@@ -2,9 +2,9 @@
 using System.Net;
 using System.Text;
 
-namespace Online_Course_API.EmailSender
+namespace Online_Course_API.sendEmail
 {
-    public class EmailSender
+    public class EmailSender : IEmailSender
     {
         public void SendEmail(string toEmail, string subject)
         {
@@ -12,11 +12,11 @@ namespace Online_Course_API.EmailSender
             SmtpClient client = new SmtpClient("smtp.ethereal.email", 587);
             client.EnableSsl = true;
             client.UseDefaultCredentials = false;
-            client.Credentials = new NetworkCredential("hassan.adel.hussein@gmail.com", "djgwPz8DPss78aakBv");
+            client.Credentials = new NetworkCredential("alene59@ethereal.email", "qVjBzt2ZncpUH2JtA6");
 
             // Create email message
             MailMessage mailMessage = new MailMessage();
-            mailMessage.From = new MailAddress("hassan.adel.hussein@gmail.com");
+            mailMessage.From = new MailAddress("myteacheriti@gmail.com");
             mailMessage.To.Add(toEmail);
             mailMessage.Subject = subject;
             mailMessage.IsBodyHtml = true;

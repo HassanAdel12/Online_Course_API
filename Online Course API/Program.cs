@@ -1,11 +1,13 @@
 
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
 using Online_Course_API.Data;
 using Online_Course_API.Model;
+using Online_Course_API.sendEmail;
 using System.Security.Cryptography;
 using System.Security.Principal;
 using System.Text;
@@ -87,6 +89,7 @@ namespace Online_Course_API
 
             builder.Services.AddAutoMapper(typeof(Program));
 
+            builder.Services.AddTransient<sendEmail.IEmailSender, EmailSender>();
 
             //builder.Services.Configure<Microsoft.AspNetCore.Http.Json.JsonOptions>(options
             //    => options.SerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles);

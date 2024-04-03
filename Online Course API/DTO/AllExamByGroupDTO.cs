@@ -9,6 +9,8 @@ namespace Online_Course_API.DTO
 
         public float Grade { get; set; }
 
+        public int numQuestion { get; set; }
+
         public int Group_ID { get; set; }
 
 

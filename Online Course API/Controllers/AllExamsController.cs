@@ -92,11 +92,12 @@ namespace Online_Course_API.Controllers
             try
             {
                 var exams = _context.Quizzes
-                .Where(g => g.Group_ID == groupId)
+                .Where(g => g.Group_ID == groupId).Include(q => q.Questions)
                 .ToList();
 
 
                 var allExamByGroupDTO = _mapper.Map<List<AllExamByGroupDTO>>(exams);
+
                 return Ok(allExamByGroupDTO);
             }
             catch (Exception ex)
