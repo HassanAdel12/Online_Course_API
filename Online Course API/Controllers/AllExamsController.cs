@@ -20,28 +20,32 @@ namespace Online_Course_API.Controllers
             _mapper = mapper;
         }
 
-        [HttpGet("GroupOrstudent/{groupId}")]
+
+
+        [HttpGet("GroupOrstudent/{groupId}/{studentId}")]
         public ActionResult<IEnumerable<AllExamByGroupDTO>> GetExamsByGroupOrstudent(int groupId, int studentId)
         {
             try
             {
                 var exams = _context.Quizzes
-                .Where(g => g.Group_ID == groupId && g.Quiz_Available == false)
+                .Where(g => g.Group_ID == groupId && g.Quiz_Available == true)
                 .Include(q => q.Questions)
                 .ToList();
 
                 List<AllExamByGroupDTO> examsStudents = _context.Student_Quizzes
-                .Where(g => g.Quiz.Group_ID == groupId
-                || g.Student_ID == studentId && g.Quiz.Quiz_Available == false)
                 .Include(q => q.Quiz).ThenInclude(q => q.Questions).
+                Where(g => g.Quiz.Group_ID == groupId
+                && g.Student_ID == studentId && g.Quiz.Quiz_Available == true).
                 Select(g => new AllExamByGroupDTO
                 {
+
                     Quiz_ID = g.Quiz_ID,
                     Quiz_Name = g.Quiz.Quiz_Name,
                     Grade = g.Grade,
                     Group_ID = g.Quiz.Group_ID,
                     numQuestion = g.Quiz.Questions.Count(),
-                    Quiz_Available = g.Quiz.Quiz_Available
+                    Quiz_Available = g.Quiz.Quiz_Available,
+                    Instructor_ID = g.Quiz.Instructor_ID
 
 
                 }).ToList();
@@ -72,7 +76,8 @@ namespace Online_Course_API.Controllers
                             Group_ID = exam.Group_ID,
                             Grade = -1,
                             numQuestion = exam.Questions.Count(),
-                            Quiz_Available = exam.Quiz_Available
+                            Quiz_Available = exam.Quiz_Available,
+                            Instructor_ID = exam.Instructor_ID
 
                         });
                     }

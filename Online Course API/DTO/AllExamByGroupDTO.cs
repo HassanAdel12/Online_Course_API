@@ -16,6 +16,8 @@ namespace Online_Course_API.DTO
 
         public int Group_ID { get; set; }
 
+        public int Instructor_ID { get; set; }
+
 
     }
 }

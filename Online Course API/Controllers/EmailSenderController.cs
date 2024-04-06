@@ -41,7 +41,7 @@ namespace Online_Course_API.Controllers
                 {
                     //user.Email
                     emailSender.SendEmail(user.Email
-                        , "New Student is now Enrolled in " + group.GroupName);
+                        , $"New Student is now Enrolled in {group.GroupName}, Number of Student : {group.StudentGroups.Count()}");
                     return Ok();
                 }
                 else
