@@ -454,6 +454,9 @@ namespace Online_Course_API.Migrations
                     b.Property<int>("Instructor_ID")
                         .HasColumnType("int");
 
+                    b.Property<bool>("Quiz_Available")
+                        .HasColumnType("bit");
+
                     b.Property<string>("Quiz_Name")
                         .IsRequired()
                         .HasMaxLength(50)

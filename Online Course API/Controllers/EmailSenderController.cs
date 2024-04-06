@@ -39,6 +39,7 @@ namespace Online_Course_API.Controllers
 
                 if (group != null && instructor != null && user != null)
                 {
+                    //user.Email
                     emailSender.SendEmail(user.Email
                         , "New Student is now Enrolled in " + group.GroupName);
                     return Ok();

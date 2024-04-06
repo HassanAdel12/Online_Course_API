@@ -7,6 +7,9 @@ namespace Online_Course_API.DTO
         public int Quiz_ID { get; set; }
         public string Quiz_Name { get; set; }
 
+        [Required(ErrorMessage = "Quiz Available is required")]
+        public bool Quiz_Available { get; set; }
+
         public float Grade { get; set; }
 
         public int numQuestion { get; set; }

@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace Online_Course_API.Migrations
 {
     /// <inheritdoc />
-    public partial class createDatabase : Migration
+    public partial class CreateDatabase : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -323,6 +323,7 @@ namespace Online_Course_API.Migrations
                     Quiz_ID = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Quiz_Name = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
+                    Quiz_Available = table.Column<bool>(type: "bit", nullable: false),
                     Instructor_ID = table.Column<int>(type: "int", nullable: false),
                     Group_ID = table.Column<int>(type: "int", nullable: false)
                 },

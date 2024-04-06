@@ -26,19 +26,22 @@ namespace Online_Course_API.Controllers
             try
             {
                 var exams = _context.Quizzes
-                .Where(g => g.Group_ID == groupId)
+                .Where(g => g.Group_ID == groupId && g.Quiz_Available == false)
+                .Include(q => q.Questions)
                 .ToList();
 
                 List<AllExamByGroupDTO> examsStudents = _context.Student_Quizzes
                 .Where(g => g.Quiz.Group_ID == groupId
-                || g.Student_ID == studentId).
-
+                || g.Student_ID == studentId && g.Quiz.Quiz_Available == false)
+                .Include(q => q.Quiz).ThenInclude(q => q.Questions).
                 Select(g => new AllExamByGroupDTO
                 {
                     Quiz_ID = g.Quiz_ID,
                     Quiz_Name = g.Quiz.Quiz_Name,
                     Grade = g.Grade,
                     Group_ID = g.Quiz.Group_ID,
+                    numQuestion = g.Quiz.Questions.Count(),
+                    Quiz_Available = g.Quiz.Quiz_Available
 
 
                 }).ToList();
@@ -67,7 +70,9 @@ namespace Online_Course_API.Controllers
                             Quiz_ID = exam.Quiz_ID,
                             Quiz_Name = exam.Quiz_Name,
                             Group_ID = exam.Group_ID,
-                            Grade = -1
+                            Grade = -1,
+                            numQuestion = exam.Questions.Count(),
+                            Quiz_Available = exam.Quiz_Available
 
                         });
                     }

@@ -12,8 +12,8 @@ using Online_Course_API.Data;
 namespace Online_Course_API.Migrations
 {
     [DbContext(typeof(OnlineCourseDBContext))]
-    [Migration("20240330123000_download")]
-    partial class download
+    [Migration("20240406020124_CreateDatabase")]
+    partial class CreateDatabase
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -456,6 +456,9 @@ namespace Online_Course_API.Migrations
 
                     b.Property<int>("Instructor_ID")
                         .HasColumnType("int");
+
+                    b.Property<bool>("Quiz_Available")
+                        .HasColumnType("bit");
 
                     b.Property<string>("Quiz_Name")
                         .IsRequired()

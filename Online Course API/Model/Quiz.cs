@@ -13,6 +13,10 @@ namespace Online_Course_API.Model
         public string Quiz_Name { get; set; }
 
 
+        [Required(ErrorMessage = "Quiz Available is required")]
+        public bool Quiz_Available { get; set; }
+
+
         [ForeignKey("Instructor")]
         public int Instructor_ID { get; set; }
 
