@@ -32,6 +32,8 @@ namespace Online_Course_API.Controllers
             {
                 Group group = context.Groups.Find(GroupId);
 
+
+
                 Instructor instructor = context.Instructors.Find(group.Instructor_ID);
 
                 ApplicationUser user = context.Users.Find(instructor.UserId);
@@ -41,7 +43,8 @@ namespace Online_Course_API.Controllers
                 {
                     //user.Email
                     emailSender.SendEmail(user.Email
-                        , $"New Student is now Enrolled in {group.GroupName}, Number of Student : {group.StudentGroups.Count()}");
+                        , $"New Student is now Enrolled in {group.GroupName}," +
+                        $" Number of Student : {group.Num_Students}");
                     return Ok();
                 }
                 else
