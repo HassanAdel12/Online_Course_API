@@ -7,7 +7,7 @@ namespace Online_Course_API.DTO
     public class StudentDTO
     {
         public int Student_ID { get; set; }
-        
+
         public string UserId { get; set; }
 
         public virtual ApplicationUser ApplicationUser { get; set; }
@@ -42,7 +42,7 @@ namespace Online_Course_API.DTO
         public int? Parent_ID { get; set; }
 
 
-        
-      
+
+
     }
 }

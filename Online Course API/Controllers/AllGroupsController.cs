@@ -29,7 +29,7 @@ namespace Online_Course_API.Controllers
             var groups = _context.Groups
                 .Where(g => !_context.Student_Groups.Any
                 (sg => sg.Group_ID == g.Group_ID && sg.Student_ID == studentId)
-                && g.Course_ID == courseId).
+                && g.Course_ID == courseId && g.Num_Students < 22).
                 Include(g => g.Instructor).ThenInclude(g => g.ApplicationUser).
                Include(g => g.Course).ToList();
 
